@@ -1,0 +1,23 @@
+{
+  "name": "reexamproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jepp0103/ReexamProject.git"
+  },
+  "author": "Jeppe Nannestad Dyekjær",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jepp0103/ReexamProject/issues"
+  },
+  "homepage": "https://github.com/Jepp0103/ReexamProject#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1"
+  }
+}
