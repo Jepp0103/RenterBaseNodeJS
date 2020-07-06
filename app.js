@@ -28,6 +28,9 @@ const knex = Knex(knexfile.development); //Connection to database established.
 Model.knex(knex);
 
 //References to routers
+const accountRouter = require("./routes/accountRouter.js");
+app.use(accountRouter);
+
 const authRouter = require("./routes/authRouter.js");
 app.use(authRouter);
 

@@ -8,7 +8,7 @@ class User extends Model {
     static relationMappings = {
         rooms: {
             relation: Model.HasManyRelation,
-            modelClass: Room,
+            modelClass: Item,
             join: {
                 from: "users.id",
                 to: "items.userId"

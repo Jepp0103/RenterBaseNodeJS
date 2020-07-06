@@ -1,0 +1,31 @@
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./updateUser.js"></script>
+    <div style="margin: 0em 1em;">
+        <h1>Update profile</h1>
+        <form action="/updateUser" method="POST" name="updateUser" style="padding-bottom: 1em;">
+            <label for="username">Username:</label>
+            <br>
+            <input name="username" type="text" id="username2" class="form-control-sm"><br>
+            <div style="padding-top: 1em;"></div>
+
+            <label for="email">Email:</label>
+            <br>            
+            <input name="email" type="text" id="email" class="form-control-sm"><br>
+            <div style="padding-top: 1em;"></div>
+
+            <label for="newPassword">New password:</label>
+            <br>            
+            <input name="newPassword" type="password" id="newPassword" class="form-control-sm"><br>
+            <div style="padding-top: 1em;"></div>
+
+            <label for="currentPassword">Current password:</label>
+            <br>
+            <input name="currentPassword" type="password" id="currentPassword" class="form-control-sm"><br>
+            <div style="padding-top: 1em;"></div>
+
+            <input type="submit" value="Update profile" class="btn btn-success"> <br>
+        </form>
+    </div>
+</body>

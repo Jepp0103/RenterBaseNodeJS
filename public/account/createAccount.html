@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create account</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="card mx-auto" style="text-align: center; width: 40rem; margin-top: 4em; padding-bottom: 4em;">
+        <div style="padding-top: 2.5em;">
+            <h1>Create an account</h1>
+            <form action="/createAccount" method="POST">
+                <input class="form-control" style="text-align: center;" type="text" name="username" placeholder="Username" required>
+                <div style="padding-top: 0.5em;"></div>
+                <input class="form-control" style="text-align: center;" type="text" name="email" placeholder="Email" required>
+                <div style="padding-top: 0.5em;"></div>
+                <p class="form-text text-muted">Password needs to be 8 characters long</p>
+                <input class="form-control" style="text-align: center;" type="password" name="password" placeholder="Password" required>
+                <div style="padding-top: 0.5em;"></div>
+                <input id="submit_button" type="submit" class="btn btn-success" name="create" value="Create">
+            </form>
+            <form action="/login">
+                <div style="padding-top: 0.5em;"></div>
+                <input id="submit_button" type="submit" class="btn btn-danger" name="cancel" value="Cancel">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
