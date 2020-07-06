@@ -4,8 +4,11 @@ const bcrypt = require("bcrypt");
 //const User ...
 
 router.get("/", (req, res) => {
-    const loginPage = fileSystem.readFileSync("./public/login/login.html", "utf-8");
-    return res.send(page);
+    if (req.session.login) {
+        return res.redirect("/main");
+    } else {
+        return res.redirect("/login");    
+    }
 });
 
 //GET methods

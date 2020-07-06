@@ -8,12 +8,14 @@ exports.up = function(knex) {
         table.string("email").notNullable().unique();
         table.timestamp("createdAt").defaultTo(knex.fn.now());
     })
-    .createTable("bikes", table => {
-        table.increments("bikeId");
+    .createTable("items", table => {
+        table.increments("itemId");
+        table.string("name")
         table.string("brand");
-        table.string("type");
+        table.string("category");
         table.string("description");
         table.integer("age");
+        table.integer("price");
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
         table.foreign("userId").references("users.id");
     });
@@ -21,6 +23,6 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists("bikes")
+        .dropTableIfExists("items")
         .dropTableIfExists("users");
 };

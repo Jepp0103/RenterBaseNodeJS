@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
-<h1>Login</h1>
 <body>
-    
+    <div class="card mx-auto" style="text-align: center; width: 20rem; margin-top: 2em; padding-bottom: 2em;">
+        <div style="padding-top: 2.5em;">
+            <h1>Login</h1>
+            <form action="/main" method="POST">
+                <input class="form-control-sm" style="text-align: center;" type="username" name="username" placeholder="Username" required>
+                <div style="padding-top: 0.5em;"></div>
+                <input class="form-control-sm" style="text-align: center;" type="password" name="password" placeholder="Password" required>
+                <div style="padding-top: 0.5em;"></div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>   
+            </form>
+        </div>
+        <div style = "text-align: center; padding-top: 0.5em;">
+            <form action="/createAccount" method="GET">
+                <button type="submit" class="btn btn-success">Create a new account</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

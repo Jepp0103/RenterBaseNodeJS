@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./navbar.js"></script>
+    <script src="../home/home.js"></script>
+</head>
+<body>
+    <div class="navbar bg-dark navbar-dark">
+        <div>
+            <a class="navbar-brand" href="/home">
+                ChitChat
+            </a>
+            <a href="/chat" style="color:white;">
+                <button type="button" class="btn btn-primary">  
+                    Public chat
+                </button>
+            </a>
+
+            <a href="/updateUser" style="color:white;">
+                <button type="button" class="btn btn-primary">  
+                    Update profile
+                </button>
+            </a>    
+            
+            <a href="/createRoom" style="color:white;">
+                <button type="button" class="btn btn-primary">  
+                    Create room
+                </button>
+            </a>
+        </div>
+
+        <div class="form-inline my-2 my-lg-0">
+            <p id="username" style="color: white; margin-top: 1em; margin-right: 1em;"></p>
+            <br>
+            <form>
+                <a style="padding-right: 1em;" href="/updateUser" id="username" data-placement="bottom">
+                    <img id="Userlogo" src="../image/User.png" width="40" height="40" alt="ReexamProject"></img>
+                </a>
+            </form>
+            
+            <form action="/logout" method="POST" name="logout">
+                <input type="submit" value="Logout" id="logout" class="btn btn-danger">
+            </form>
+        </div>
+    </div>   
+
+    
+    

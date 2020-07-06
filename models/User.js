@@ -1,0 +1,20 @@
+const { Model } = require("objection");
+
+const Item = require("./Item.js");
+
+class User extends Model {
+    static tableName = "users";
+
+    static relationMappings = {
+        rooms: {
+            relation: Model.HasManyRelation,
+            modelClass: Room,
+            join: {
+                from: "users.id",
+                to: "items.userId"
+            }
+        }
+    }
+}
+
+module.exports = User;
