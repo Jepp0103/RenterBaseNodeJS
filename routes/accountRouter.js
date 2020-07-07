@@ -45,7 +45,14 @@ router.get("/accountData", async (req, res) => {
 
 //POST methods
 router.post("/createAccount", (req, res) => {
-    const { username, password, email, address, city, zipCode, age} = req.body;
+    const { username, 
+            password, 
+            email, 
+            address, 
+            city, 
+            zipCode, 
+            age } = req.body;
+    
     if(username && password && email && address && city && zipCode && age) {
         if(password.length < 8) {
             return res.status(400).send({ response: "Length of password must be 8 characters long and have an uppercase start letter."})
@@ -89,8 +96,10 @@ router.post("/updateAccount", async (req, res) => {
             age,
             email } = req.body;
 
+            console.log(req.body);
+
     try {
-        if (username && currentPassword && address && city && zipCode && age && email) {
+        if (username && newPassword && currentPassword && address && city && zipCode && age && email) {
 
             const accountInfo = await User.query().select("id", "username", "password", "address", "city", "zip_code", "age", "email")
             .where("id", req.session.userId);
@@ -104,10 +113,18 @@ router.post("/updateAccount", async (req, res) => {
                                 password: hashedPassword,
                                 address: req.body.address,
                                 city: req.body.city,
-                                zipCode: req.body.zipCode,
+                                zip_code: req.body.zipCode,
                                 age: req.body.age,
                                 email: req.body.email
-                            });
+                            }).then(updatedAccount => {
+                                req.session.username = username;
+                                req.session.address = address;
+                                req.session.city = city;
+                                req.session.zipCode = zipCode;
+                                req.session.age = age;
+                                req.session.email = email;
+                                return res.redirect("/updateAccount");
+                            })
                         });
                     }
                 });

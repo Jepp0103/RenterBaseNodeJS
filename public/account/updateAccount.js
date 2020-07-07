@@ -1,4 +1,4 @@
-// Ajax call for getting the username
+// Ajax call for getting the data for a user
 $.get("/accountData").done(data => {
     $("#username2").val(data.response.username);
     $("#email").val(data.response.email);
