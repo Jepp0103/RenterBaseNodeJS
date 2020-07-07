@@ -75,6 +75,47 @@ router.post("/createAccount", (req, res) => {
     }
 });
 
+router.post("/updateAccount", async (req, res) => {
+    const { username,
+            newPassword, 
+            currentPassword,
+            address,
+            city, 
+            zipCode,
+            age,
+            email } = req.body;
+
+    try {
+        if (username && currentPassword && address && city && zipCode && age && email) {
+            const accountInfo = await User.query().select("id", "username", "password", "address", "city", "zip_code", "age", "email")
+            .where("id", req.session.userId);
+
+            if (accountInfo.length === 1) {
+                bcrypt.compare(currentPassword, accountInfo[0].password).then(comparison => {
+                    if (comparison === true) {
+                        bcrypt.hash(newPassword, saltRounds).then(hashedPassword => {
+                            User.query().where("id", req.session.userId).update({
+                                username: req.body.username,
+                                password: hashedPassword,
+                                address: req.body.address,
+                                city: req.body.city,
+                                zipCode: req.body.zipCode,
+                                age: req.body.age,
+                                email: req.body.email
+                            });
+                        });
+                    }
+                });
+            } else {
+                return res.redirect("/updateAccount");
+            }
+        } else {
+            return res.redirect("/updateAccount");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;
 
