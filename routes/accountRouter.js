@@ -95,9 +95,6 @@ router.post("/updateAccount", async (req, res) => {
             zipCode,
             age,
             email } = req.body;
-
-            console.log(req.body);
-
     try {
         if (username && newPassword && currentPassword && address && city && zipCode && age && email) {
 
