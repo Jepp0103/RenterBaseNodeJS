@@ -10,25 +10,25 @@
     <script src="../main/main.js"></script>
 </head>
 <body>
-    <div class="navbar bg-dark navbar-dark">
+    <div class="navbar navbar-light" style="background-color: #e3f2fd;">
         <div>
             <a class="navbar-brand" href="/main">
-                The renter base
+                <h1>The renter base</h1>
             </a>
             <a href="/rentChat" style="color:white;">
-                <button type="button" class="btn btn-primary">  
+                <button type="button" class="btn btn-outline-primary">  
                     Rent chat
                 </button>
             </a>
 
             <a href="/updateAccount" style="color:white;">
-                <button type="button" class="btn btn-primary">  
+                <button type="button" class="btn btn-outline-primary">  
                     Update account
                 </button>
             </a>    
             
             <a href="/createItem" style="color:white;">
-                <button type="button" class="btn btn-primary">  
+                <button type="button" class="btn btn-outline-primary">  
                     Create rent item
                 </button>
             </a>
@@ -38,12 +38,11 @@
             <p id="username" style="color: white; margin-top: 1em; margin-right: 1em;"></p>
             <br>
             <form>
-                <a style="padding-right: 1em;" href="/updateUser" id="username" data-placement="bottom">
+                <a style="padding-right: 1em;" href="/updateAccount" id="username" data-placement="bottom">
                 </a>
             </form>
-            
             <form action="/logout" method="POST" name="logout">
-                <input type="submit" value="Logout" id="logout" class="btn btn-danger">
+                <input type="submit" value="Logout" id="logout" class="btn btn-outline-danger">
             </form>
         </div>
     </div>   

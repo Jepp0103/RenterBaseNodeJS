@@ -10,12 +10,17 @@ router.get("/createAccount", (req, res) => {
     return res.send(createAccountPage);
 });
 
-
+router.get("/updateAccount", (req, res) => {
+    const navbarPage  = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
+    const updateAccountPage = fileSystem.readFileSync("./public/account/updateAccount.html", "utf-8");
+    const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
+    return res.send(navbarPage + updateAccountPage + footerPage);
+});
 
 //POST methods
 router.post("/createAccount", (req, res) => {
-    const { username, email, password } = req.body;
-    if(username && password) {
+    const { username, password, email, address, city, zipCode, age} = req.body;
+    if(username && password && email && address && city && zipCode && age) {
         if(password.length < 8) {
             return res.status(400).send({ response: "Length of password must be 8 characters long and have an uppercase start letter."})
         } else {
@@ -27,8 +32,12 @@ router.post("/createAccount", (req, res) => {
                         bcrypt.hash(password, saltRounds).then(hashedPassword => {
                             User.query().insert({
                                 username, 
-                                email, 
-                                password: hashedPassword
+                                password: hashedPassword,
+                                address,
+                                city,
+                                zipCode,
+                                age,
+                                email                                
                             }).then(createdAccount => {
                                 return res.redirect("/login");
                             });

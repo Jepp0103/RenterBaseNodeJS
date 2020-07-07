@@ -1,31 +1,39 @@
+<body>
 
+    <div style="text-align: center; padding-left: 1em;">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./updateUser.js"></script>
-    <div style="margin: 0em 1em;">
         <h1>Update account</h1>
-        <form action="/updateUser" method="POST" name="updateUser" style="padding-bottom: 1em;">
-            <label for="username">Username:</label>
-            <br>
-            <input name="username" type="text" id="username2" class="form-control-sm"><br>
-            <div style="padding-top: 1em;"></div>
 
-            <label for="email">Email:</label>
-            <br>            
-            <input name="email" type="text" id="email" class="form-control-sm"><br>
-            <div style="padding-top: 1em;"></div>
+        <form action="/updateAccount" method="POST" name="updateAccount" style="padding-bottom: 1em;">
+            <div class="row">
+                <div class="col-sm">
+                    <label for="username">Username:</label><br>
+                    <input name="username"type="text" id="username" class="form-control-sm"><br>
 
-            <label for="newPassword">New password:</label>
-            <br>            
-            <input name="newPassword" type="password" id="newPassword" class="form-control-sm"><br>
-            <div style="padding-top: 1em;"></div>
+                    <label for="newPassword">New password:</label><br>
+                    <input name="newPassword" type="password" id="newPassword" class="form-control-sm"><br>
 
-            <label for="currentPassword">Current password:</label>
-            <br>
-            <input name="currentPassword" type="password" id="currentPassword" class="form-control-sm"><br>
-            <div style="padding-top: 1em;"></div>
+                    <label for="currentPassword">Current password:</label><br>
+                    <input name="currentPassword" type="password" id="currentPassword" class="form-control-sm"><br>
 
-            <input type="submit" value="Update profile" class="btn btn-success"> <br>
+                    <label for="email">Email:</label><br>
+                    <input name="email"type="text" id="email" class="form-control-sm"><br>
+                </div>
+                <div class="col-sm">
+                    <label for="address">Address:</label><br>
+                    <input name="address"type="text" id="address" class="form-control-sm"><br>
+
+                    <label for="city">City:</label><br>
+                    <input name="city"type="text" id="city" class="form-control-sm"><br>
+
+                    <label for="zipCode">Zip code:</label><br>
+                    <input type="number" id="zipCode" name="zipCode" class="form-control-sm"><br>
+                </div>
+            </div>
+
+            <input type="submit" value="Update account" class="btn btn-success"> <br>
         </form>
     </div>
 </body>
+<script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./updateAccount.js"></script>

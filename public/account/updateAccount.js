@@ -4,10 +4,7 @@ $.get("/updateUserData").done(data => {
     $("#email").val(data.response.email);
 });
 
-fetch("/updateUserData").then(response => response.json()).then(data => {
-    console.log(data);
-    document.getElementById("username2")
-});
+
 
 
 

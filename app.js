@@ -34,15 +34,21 @@ app.use(accountRouter);
 const authRouter = require("./routes/authRouter.js");
 app.use(authRouter);
 
+const itemRouter = require("./routes/itemRouter.js");
+app.use(itemRouter);
+
+//Getting access to static files such as CSS, images, videos etc.
+app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public/item"));
+app.use(express.static(__dirname + "/public/navbar"));
+app.use(express.static(__dirname + "/public/account"));
+
 //Establishing socket connection
 io.on("connection", socket => {
     socket.on("Message from user:", (data) => {
         io.emit("User:", { comment: data.comment });
     });
 });
-
-
-
 
 
 //Starting server

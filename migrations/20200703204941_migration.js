@@ -5,6 +5,10 @@ exports.up = function(knex) {
         table.increments("id");
         table.string("username").notNullable().unique();
         table.string("password").notNullable().unique();
+        table.string("address");
+        table.string("city");
+        table.string("zipCode");
+        table.integer("age");
         table.string("email").notNullable().unique();
         table.timestamp("createdAt").defaultTo(knex.fn.now());
     })
@@ -16,6 +20,7 @@ exports.up = function(knex) {
         table.string("description");
         table.integer("age");
         table.integer("price");
+        table.integer("days");
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
         table.foreign("userId").references("users.id");
     });

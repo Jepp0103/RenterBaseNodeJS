@@ -40,26 +40,26 @@ router.post("/main", async (req, res) => {
     try {
         if (username && password) {
             const validPassword = await User.query().select("id", "username", "email", "password").where("username", username);
-        }
+        
+            if (validPassword.length !== 1) { //Checking if one matching user appears from the database.
+                return res.redirect("login");
+            }
 
-        if (validPassword.length !== 1) { //Checking if one matching user appears from the database.
-            return res.redirect("login");
-        }
-
-        if (validPassword.length === 1) {
-            bcrypt.compare(password, validPassword[0].password).then(compare => {
-                if (compare === true) {
-                    req.session.userId = validPassword[0].id;
-                    req.session.login = true;
-                    req.session.username = username;
-                    req.session.email = validPassword[0].email;
-                    return res.redirect("/main");
-                } else {
-                    return res.redirect("login");
-                }
-            });
-        } else {
-            return res.redirect("login");
+            if (validPassword.length === 1) {
+                bcrypt.compare(password, validPassword[0].password).then(compare => {
+                    if (compare === true) {
+                        req.session.userId = validPassword[0].id;
+                        req.session.login = true;
+                        req.session.username = username;
+                        req.session.email = validPassword[0].email;
+                        return res.redirect("/main");
+                    } else {
+                        return res.redirect("login");
+                    }
+                });
+            } else {
+                return res.redirect("login");
+            }
         }
     } catch (error) {
         console.log(error);
