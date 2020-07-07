@@ -11,10 +11,14 @@ router.get("/createAccount", (req, res) => {
 });
 
 router.get("/updateAccount", (req, res) => {
-    const navbarPage  = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
-    const updateAccountPage = fileSystem.readFileSync("./public/account/updateAccount.html", "utf-8");
-    const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
-    return res.send(navbarPage + updateAccountPage + footerPage);
+    if (req.session.login) {
+        const navbarPage  = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
+        const updateAccountPage = fileSystem.readFileSync("./public/account/updateAccount.html", "utf-8");
+        const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
+        return res.send(navbarPage + updateAccountPage + footerPage);
+    } else {
+        return res.redirect("/login");
+    }
 });
 
 router.get("/accountData", async (req, res) => {
@@ -87,12 +91,13 @@ router.post("/updateAccount", async (req, res) => {
 
     try {
         if (username && currentPassword && address && city && zipCode && age && email) {
+
             const accountInfo = await User.query().select("id", "username", "password", "address", "city", "zip_code", "age", "email")
             .where("id", req.session.userId);
 
             if (accountInfo.length === 1) {
-                bcrypt.compare(currentPassword, accountInfo[0].password).then(comparison => {
-                    if (comparison === true) {
+                bcrypt.compare(currentPassword, accountInfo[0].password).then(compare => {
+                    if (compare === true) {
                         bcrypt.hash(newPassword, saltRounds).then(hashedPassword => {
                             User.query().where("id", req.session.userId).update({
                                 username: req.body.username,
