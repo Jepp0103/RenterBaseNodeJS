@@ -17,6 +17,28 @@ router.get("/updateAccount", (req, res) => {
     return res.send(navbarPage + updateAccountPage + footerPage);
 });
 
+router.get("/accountData", async (req, res) => {
+    if (req.session.login) {
+        const accountInfo = await User.query().select("username", "address", "city", "zip_code", "age", "email").where("id", req.session.userId);
+        const username = accountInfo[0].username;
+        const address = accountInfo[0].address;
+        const city = accountInfo[0].city;
+        const zipCode = accountInfo[0].zipCode;
+        const age = accountInfo[0].age;
+        const email = accountInfo[0].email;
+        return res.send( { response: {
+            username: username,
+            address: address,
+            city: city,
+            zipCode: zipCode,
+            age: age,
+            email: email
+        }});
+    } else {
+        return res.redirect("/login");
+    }
+});
+
 //POST methods
 router.post("/createAccount", (req, res) => {
     const { username, password, email, address, city, zipCode, age} = req.body;

@@ -5,11 +5,11 @@ exports.up = function(knex) {
         table.increments("id");
         table.string("username").notNullable().unique();
         table.string("password").notNullable().unique();
+        table.string("email").notNullable().unique();
         table.string("address");
         table.string("city");
         table.string("zipCode");
         table.integer("age");
-        table.string("email").notNullable().unique();
         table.timestamp("createdAt").defaultTo(knex.fn.now());
     })
     .createTable("items", table => {
