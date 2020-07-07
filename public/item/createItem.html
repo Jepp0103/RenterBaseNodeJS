@@ -8,31 +8,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="card mx-auto" style="text-align: center; width: 40rem; margin-top: 4em; padding-bottom: 4em;">
-        <div style="padding-top: 2.5em;">
-            <h1>Create an item for rent</h1>
-            <form action="/createItem" method="POST">
-                <input class="form-control" style="text-align: center;" type="text" name="name" placeholder="Name" required>
-                <div style="padding-top: 0.5em;"></div>
-                <input class="form-control" style="text-align: center;" type="text" name="brand" placeholder="Brand" required>
-                <div style="padding-top: 0.5em;"></div>
-                <input class="form-control" style="text-align: center;" type="category" name="category" placeholder="Category" required>
-                <div style="padding-top: 0.5em;"></div>
-                <textarea rows="5" class="form-control" style="text-align: center;" type="description" name="description" placeholder="Description"  required></textarea>
-                <div style="padding-top: 0.5em;"></div>
-                <input class="form-control" style="text-align: center;" type="age" name="age" placeholder="Age" required>
-                <div style="padding-top: 0.5em;"></div>
-                <input class="form-control" style="text-align: center;" type="price" name="price" placeholder="Price" required>
-                <div style="padding-top: 0.5em;"></div>
-                <input class="form-control" style="text-align: center;" type="days" name="days" placeholder="Amount of days to rent" required>
-                <div style="padding-top: 0.5em;"></div>
-                <input id="submit_button" type="submit" class="btn btn-success" name="create_item" value="Create item">
-            </form>
-            <form action="/main">
-                <div style="padding-top: 0.5em;"></div>
-                <input id="submit_button" type="submit" class="btn btn-danger" name="cancel" value="Cancel">
-            </form>
-        </div>
-    </div>
+    <h1>Create an item for rent</h1>
+        <form action="/createItem" method="POST">
+            <div class="row">
+                <div class="col-sm">
+                    <input class="form-control" style="text-align: center;" type="text" name="name" placeholder="Name" required>
+                    <div style="padding-top: 0.5em;"></div>
+                    <input class="form-control" style="text-align: center;" type="text" name="brand" placeholder="Brand" required>                    
+                    <div style="padding-top: 0.5em;"></div>
+                    <input class="form-control" style="text-align: center;" type="category" name="category" placeholder="Category" required>
+                    <div style="padding-top: 0.5em;"></div>
+                    <textarea rows="5" class="form-control" style="text-align: center;" type="description" name="description" placeholder="Description"  required></textarea>
+                </div>
+                <div class="col-sm">
+                    <input class="form-control" style="text-align: center;" type="age" name="age" placeholder="Age" required>
+                    <div style="padding-top: 0.5em;"></div>
+                    <input class="form-control" style="text-align: center;" type="price" name="price" placeholder="Price" required>
+                    <div style="padding-top: 0.5em;"></div>
+                    <input class="form-control" style="text-align: center;" type="days" name="days" placeholder="Amount of days to rent" required>
+                    <div style="padding-top: 0.5em;"></div>
+                </div>
+            </div>
+            <input id="submit_button" type="submit" class="btn btn-success" name="create_item" value="Create item">
+        </form>
 </body>
 </html>
