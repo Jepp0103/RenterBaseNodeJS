@@ -8,6 +8,8 @@ router.get("/rentChat", (req, res) => {
         const rentChatPage = fileSystem.readFileSync("./public/rentChat/rentChat.html", "utf-8");
         const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
         return res.send(navbarPage + rentChatPage + footerPage);
+    } else {
+        return res.redirect("/login");
     }
 });
 

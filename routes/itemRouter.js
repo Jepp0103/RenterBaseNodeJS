@@ -14,6 +14,16 @@ router.get("/createItem", (req, res) => {
     }
 });
 
+router.get("/items", async (req, res) => {
+    if (req.session.login) {
+        const items = await Item.query().select();
+        return res.send( { response: {
+            items 
+        }});
+    } else {
+        return res.redirect("/login");
+    }
+});
 
 //POST methods
 router.post("/createItem", (req, res) => {

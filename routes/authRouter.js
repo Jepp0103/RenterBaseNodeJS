@@ -66,5 +66,12 @@ router.post("/main", async (req, res) => {
     }
 });
 
+router.post("/logout", (req, res) => {
+    req.session.login = undefined;
+    req.session.username = undefined;
+    req.session.email = undefined;
+    return res.redirect("/login");
+});
+
 
 module.exports = router;
