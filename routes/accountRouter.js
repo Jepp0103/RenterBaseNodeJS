@@ -43,6 +43,14 @@ router.get("/accountData", async (req, res) => {
     }
 });
 
+router.get("/getUsername", (req, res) => {
+    if (req.session.login) {
+        return res.send({ response: req.session });
+    } else {
+        res.redirect("/login");
+    }
+});
+
 //POST methods
 router.post("/createAccount", (req, res) => {
     const { username, 

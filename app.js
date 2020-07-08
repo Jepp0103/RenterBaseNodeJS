@@ -37,6 +37,9 @@ app.use(authRouter);
 const itemRouter = require("./routes/itemRouter.js");
 app.use(itemRouter);
 
+const rentChatRouter = require("./routes/rentChatRouter.js");
+app.use(rentChatRouter);
+
 //Getting access to static files such as CSS, images, videos etc.
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public/item"));
