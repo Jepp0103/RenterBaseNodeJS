@@ -1,35 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create item</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-</head>
-<body>
-    <h1>Create an item for rent</h1>
-        <form action="/createItem" method="POST">
+    <div style="text-align: center; padding-left: 1em;">
+        <h1>Create an item for rent</h1>
+        <form action="/createItem" method="POST" name="/createItem" style="padding-bottom: 1em;">
             <div class="row">
                 <div class="col-sm">
-                    <input class="form-control" style="text-align: center;" type="text" name="name" placeholder="Name" required>
-                    <div style="padding-top: 0.5em;"></div>
-                    <input class="form-control" style="text-align: center;" type="text" name="brand" placeholder="Brand" required>                    
-                    <div style="padding-top: 0.5em;"></div>
-                    <input class="form-control" style="text-align: center;" type="category" name="category" placeholder="Category" required>
-                    <div style="padding-top: 0.5em;"></div>
-                    <textarea rows="5" class="form-control" style="text-align: center;" type="description" name="description" placeholder="Description"  required></textarea>
+                    <label for="name">Name of item:</label><br>
+                    <input name="name"type="text" id="name" class="form-control"><br>
+
+                    <label for="brand">Brand:</label><br>
+                    <input name="brand" type="text" id="brand" class="form-control"><br>
+
+                    <label for="category">Category:</label><br>
+                    <input name="category" type="text" id="category" class="form-control"><br>
+
+                    <label for="description">Description:</label><br>
+                    <textarea rows="5" name="description"type="text" id="description" class="form-control"></textarea><br>
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" style="text-align: center;" type="age" name="age" placeholder="Age" required>
-                    <div style="padding-top: 0.5em;"></div>
-                    <input class="form-control" style="text-align: center;" type="price" name="price" placeholder="Price" required>
-                    <div style="padding-top: 0.5em;"></div>
-                    <input class="form-control" style="text-align: center;" type="days" name="days" placeholder="Amount of days to rent" required>
-                    <div style="padding-top: 0.5em;"></div>
+                    <label for="age">Age:</label><br>
+                    <input name="age" type="number" id="age" class="form-control"><br>
+
+                    <label for="price">Price:</label><br>
+                    <input name="price" type="number" id="price" class="form-control"><br>
+
+                    <label for="days">Days:</label><br>
+                    <input name="days" type="number" id="days" class="form-control"><br>
                 </div>
             </div>
             <input id="submit_button" type="submit" class="btn btn-success" name="create_item" value="Create item">
+            <div style="padding-bottom: 0.5em;"></div>
+
         </form>
-</body>
-</html>
+    </div>
