@@ -25,6 +25,17 @@ router.get("/items", async (req, res) => {
     }
 });
 
+router.get("/updateItem", (req, res) => {
+    if (req.session.login) {
+        const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
+        const updateItemPage = fileSystem.readFileSync("./public/item/updateItem.html", "utf-8");
+        const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
+        return res.send(navbarPage + updateItemPage + footerPage);
+    } else {
+        return res.redirect("/login");
+    }
+})
+
 //POST methods
 router.post("/createItem", (req, res) => {
     const { name, brand, category, description, age, price, days } = req.body;
@@ -48,6 +59,18 @@ router.post("/createItem", (req, res) => {
             return res.status(500).send({ response: "Error in database occured."});
         }
     }
+});
+
+router.delete("/items/:itemId", (req, res) => {
+    Item.query().delete().where("itemId", req.body.itemId).then((result) => {
+        console.log("Item number", req.body.itemId, "deleted.");
+        if (result === 1) 
+            res.send("Item", req.body.itemId, "deleted");
+        else 
+            res.send("Item", req.body.itemId, "not found");
+    }).catch(error => {
+        console.log(error);
+    });
 });
 
 module.exports = router;

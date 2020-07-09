@@ -16,8 +16,10 @@ router.get("/", (req, res) => {
 //GET methods
 router.get("/login", (req, res) => {
     if (!req.session.login) {
+        const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
         const loginPage = fileSystem.readFileSync("./public/login/login.html", "utf-8");
-        return res.send(loginPage);
+        const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
+        return res.send(navbarPage + loginPage + footerPage);
     } else {
         return res.redirect("/main");
     }

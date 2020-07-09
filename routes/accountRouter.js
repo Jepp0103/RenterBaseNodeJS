@@ -6,8 +6,10 @@ const User = require("../models/User.js");
 
 //GET methods
 router.get("/createAccount", (req, res) => {
+    const navbarPage  = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
     const createAccountPage = fileSystem.readFileSync("./public/account/createAccount.html", "utf-8");
-    return res.send(createAccountPage);
+    const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
+    return res.send(navbarPage + createAccountPage + footerPage);
 });
 
 router.get("/updateAccount", (req, res) => {

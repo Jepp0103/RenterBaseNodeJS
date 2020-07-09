@@ -54,7 +54,6 @@ io.on("connection", socket => {
     });
 });
 
-
 //Starting server
 messageServer.listen(PORT, (error) => {
     if(error) {
