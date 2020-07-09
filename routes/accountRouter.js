@@ -43,7 +43,7 @@ router.get("/accountData", async (req, res) => {
     }
 });
 
-router.get("/getUsername", (req, res) => {
+router.get("/username", (req, res) => {
     if (req.session.login) {
         return res.send({ response: req.session });
     } else {

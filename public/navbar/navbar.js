@@ -1,5 +1,4 @@
 //jQuery for displaying username in navbar
-$.get("/getUsername").done(data => {
+$.get("/username").done(data => {
     $("#username").text(data.response.username);
-    $("#username").css("color", "black");
 });

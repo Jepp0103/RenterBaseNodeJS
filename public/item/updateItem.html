@@ -1,0 +1,34 @@
+<div style="text-align: center; padding-left: 1em;">
+
+    <h4><i>Update specific item</i></h4>
+    <form action="/updateAccount" method="POST" name="updateAccount" style="padding-bottom: 1em;">
+        <div class="row">
+            <div class="col-sm">
+                <label for="name">Name of item:</label><br>
+                <input name="name"type="text" id="name" class="form-control"><br>
+
+                <label for="brand">Brand:</label><br>
+                <input name="brand" type="text" id="brand" class="form-control"><br>
+
+                <label for="category">Category:</label><br>
+                <input name="category" type="text" id="category" class="form-control"><br>
+
+                <label for="description">Description:</label><br>
+                <input name="description"type="text" id="description" class="form-control"><br>
+            </div>
+            <div class="col-sm">
+                <label for="age">Age:</label><br>
+                <input name="age"type="text" id="age" class="form-control"><br>
+
+                <label for="price">Price:</label><br>
+                <input name="price" type="number" id="price" class="form-control"><br>
+
+                <label for="days">Days to rent:</label><br>
+                <input name="days" type="number" id="days" class="form-control"><br>
+            </div>
+        </div>
+        <input type="submit" value="Update item" class="btn btn-success"> <br>
+    </form>
+</div>
+<script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./updateItem.js"></script>
