@@ -6,7 +6,7 @@ class Item extends Model {
     static tableName = "items";
     
     static relationMappings = {
-        user: {
+        users: {
             relation: Model.BelongsToOneRelation,
             modelClass: User,
             join: {

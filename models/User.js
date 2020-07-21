@@ -6,7 +6,7 @@ class User extends Model {
     static tableName = "users";
 
     static relationMappings = {
-        rooms: {
+        items: {
             relation: Model.HasManyRelation,
             modelClass: Item,
             join: {
