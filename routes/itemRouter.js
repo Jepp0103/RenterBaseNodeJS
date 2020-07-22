@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Item = require("../models/Item.js");
 const fileSystem = require("fs");
+const User = require("../models/User.js");
 
 //GET methods
 router.get("/createItem", (req, res) => {
@@ -17,8 +18,10 @@ router.get("/createItem", (req, res) => {
 router.get("/items", async (req, res) => {
     if (req.session.login) {
         const items = await Item.query().select();
+        const users = await User.query().select().withGraphFetched("items");
         return res.send( { response: {
-            items 
+            items,
+            users
         }});
     } else {
         return res.redirect("/login");
