@@ -30,15 +30,16 @@ router.get("/myItems", async (req, res) => {
         userId = req.session.userId;
         const myItems = await Item.query().
             select(
-                'user_id',
-                'name', 
-                'brand', 
-                'category', 
-                'description', 
-                'age', 
-                'price', 
-                'days')
-                .where('user_id', userId);
+                "item_id",
+                "user_id",
+                "name", 
+                "brand", 
+                "category", 
+                "description", 
+                "age", 
+                "price", 
+                "days")
+                .where("user_id", userId);
         return res.send({ response: { 
                 myItems
             }});    
@@ -104,18 +105,17 @@ router.post("/createItem", (req, res) => {
 });
 
 //Deleting items
-router.post("/myItems/:itemId", (req, res) => {
+router.post("/deleteItem", (req, res) => {
     if (req.session.login) {
-        Item.query().delete().where("itemId", req.params.itemId).then(result => {
-            console.log("Item number", req.params.itemId, "deleted.");
-            if (result === 1) 
-                res.send("Item", req.params.itemId, "deleted");
-            else 
-                res.send("Item", req.params.itemId, "not found");
-        
-        }).catch(error => {
+        console.log("Deleted item id", req.body.deletedItemId);
+        try {
+            Item.query().delete().where("itemId", req.body.deletedItemId)
+            .then(deletedItem => {
+                return res.redirect("/deleteItem")
+            });
+        } catch (error) {
             console.log(error);
-        });
+        }
     } else {
         return res.redirect("/login");
     }
