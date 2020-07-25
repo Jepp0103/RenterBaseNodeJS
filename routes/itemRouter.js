@@ -51,6 +51,7 @@ router.get("/myItems", async (req, res) => {
     }
 });
 
+
 router.get("/deleteItem", (req, res) => {
     if (req.session.login) {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
@@ -63,9 +64,16 @@ router.get("/deleteItem", (req, res) => {
 })
 
 router.get("/myItems/:itemId", async (req, res) => {
+    console.log("Item id query", req.query.itemId);
+    req.params.itemId = req.query.itemId;
     if (req.session.login) {
-        const item = await Item.query().select().where("itemId", req.params.itemId);
-        return res.send({ response: item });
+        const item = await Item.query().select().where("itemId", req.params.itemId).andWhere("userId", req.session.userId); 
+        const name = item[0].name;
+        console.log(item);
+        return res.send({ response: { 
+            name 
+        } 
+        }); //Response will be empty if the itemId doesn't exists
     } else {
         return res.redirect("/login");
     }
@@ -80,7 +88,29 @@ router.get("/updateItem", (req, res) => {
     } else {
         return res.redirect("/login");
     }
-})
+});
+
+
+// router.get("/myItemData/itemId", async (req, res) => {
+
+
+//     if (req.session.login) {
+//         try {
+
+//         const itemInfo = await Item.query().select("name", "brand", "category", "description", "age", "price", "days", "userId")
+//         .where("itemId", req.params.itemId).andWhere("userId", req.session.userId);
+//         const name = itemInfo[0].name;
+
+//         return res.send( { response: {
+//             name: name
+//         }});
+//         } catch (error) {
+//             return res.status(500).send({ response: "Error in database occured or item belongs to another account."});
+//         }
+//     } else {
+//         return res.redirect("/login");
+//     }
+// });
 
 //POST methods
 router.post("/createItem", (req, res) => {

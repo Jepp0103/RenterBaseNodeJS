@@ -1,7 +1,22 @@
 <div style="text-align: center; padding-left: 1em;">
 
+    <h4>Current items created by user:</h4>
+    <p id = "myItems"></p>
+
     <h4><i>Update specific rent item</i></h4>
-    <form action="/updateItem" method="POST" name="updateItem" style="padding-bottom: 1em;">
+
+    <h4><i>Write id of item to update:</i></h4>
+    <form action="/myItems/:itemId" method="GET" id = "myItemForm" target="iframe">
+        <input name="itemId" type="number" id="itemId" value="Item id">
+        <input type="submit" value="Get item" id="submit" class="btn btn-primary"> <br>
+    </form>
+    <br>
+    <br>
+    <label for="labelName" id="labelName">Name</label>
+
+    <input name="name" type="text" id="name" class="form-control">
+        
+    <!-- <form action="/updateItem" method="POST" name="updateItem" style="padding-bottom: 1em;">
         <div class="row">
             <div class="col-sm">
                 <label for="name">Name of item:</label><br>
@@ -28,7 +43,11 @@
             </div>
         </div>
         <input type="submit" value="Update item" class="btn btn-success"> <br>
-    </form>
+    </form> -->
 </div>
+<iframe name="iframe" id="iframe" style="display: none;"></iframe>
+
 <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./item.js"></script>
+<script src="./myItemData.js"></script>
+<script src="./myItems.js"></script>
+
