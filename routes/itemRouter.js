@@ -51,7 +51,6 @@ router.get("/myItems", async (req, res) => {
     }
 });
 
-
 router.get("/deleteItem", (req, res) => {
     if (req.session.login) {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
@@ -61,13 +60,14 @@ router.get("/deleteItem", (req, res) => {
     } else {
         return res.redirect("/login");
     }
-})
+});
 
 router.get("/myItems/:itemId", async (req, res) => {
     console.log("Item id query", req.query.itemId);
     req.params.itemId = req.query.itemId;
     if (req.session.login) {
         const item = await Item.query().select().where("itemId", req.params.itemId).andWhere("userId", req.session.userId); 
+        const itemIdConst = item[0].itemId;
         const name = item[0].name;
         const brand = item[0].brand;
         const category = item[0].category;
@@ -77,14 +77,15 @@ router.get("/myItems/:itemId", async (req, res) => {
         const days = item[0].days;
         console.log(item);
         return res.send({ response: { 
-            name,
-            brand,
-            category,
-            description,
-            age,
-            price,
-            days
-        } 
+                itemIdConst,
+                name,
+                brand,
+                category,
+                description,
+                age,
+                price,
+                days
+            } 
         }); //Response will be empty if the itemId doesn't exists
     } else {
         return res.redirect("/login");
@@ -102,27 +103,6 @@ router.get("/updateItem", (req, res) => {
     }
 });
 
-
-// router.get("/myItemData/itemId", async (req, res) => {
-
-
-//     if (req.session.login) {
-//         try {
-
-//         const itemInfo = await Item.query().select("name", "brand", "category", "description", "age", "price", "days", "userId")
-//         .where("itemId", req.params.itemId).andWhere("userId", req.session.userId);
-//         const name = itemInfo[0].name;
-
-//         return res.send( { response: {
-//             name: name
-//         }});
-//         } catch (error) {
-//             return res.status(500).send({ response: "Error in database occured or item belongs to another account."});
-//         }
-//     } else {
-//         return res.redirect("/login");
-//     }
-// });
 
 //POST methods
 router.post("/createItem", (req, res) => {
@@ -146,6 +126,24 @@ router.post("/createItem", (req, res) => {
         } catch (error) {
             return res.status(500).send({ response: "Error in database occured."});
         }
+    }
+});
+
+router.post("/updateItem", (req, res) => {
+    try {
+        Item.query().where("userId", req.session.userId).andWhere("itemId", req.body.itemId2).update({
+            name: req.body.name,
+            brand: req.body.brand,
+            category: req.body.category,
+            description: req.body.description,
+            age: req.body.age,
+            price: req.body.price,
+            days: req.body.days
+        }).then(updatedItem => {
+            return res.redirect("/updateItem");
+        })
+    } catch (error) {
+        console.log(error);
     }
 });
 

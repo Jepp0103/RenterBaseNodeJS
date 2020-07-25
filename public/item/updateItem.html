@@ -15,6 +15,9 @@
             <form action="/updateItem" method="POST" name="updateItem" style="padding-bottom: 1em;">
                 <div class="row">
                     <div class="col-sm">
+                        <label for="itemId2" id = "labelItemId2">Id of item:</label><br>
+                        <input name="itemId2"type="text" id="itemId2" class="form-control" readonly><br>
+
                         <label for="name" id = "labelName">Name of item:</label><br>
                         <input name="name"type="text" id="name" class="form-control"><br>
 
@@ -23,11 +26,11 @@
 
                         <label for="category" id = "labelCategory">Category:</label><br>
                         <input name="category" type="text" id="category" class="form-control"><br>
-
-                        <label for="description" id = "labelDescription">Description:</label><br>
-                        <input name="description" type="text" id="description" class="form-control"><br>
                     </div>
                     <div class="col-sm">
+                        <label for="description" id = "labelDescription">Description:</label><br>
+                        <textarea name="description" type="text" id="description" class="form-control" rows="5"></textarea><br>
+
                         <label for="age" id = "labelAge">Age:</label><br>
                         <input name="age"type="text" id="age" class="form-control"><br>
 

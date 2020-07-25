@@ -5,6 +5,7 @@ $("#description, #labelDescription").hide();
 $("#age, #labelAge").hide();
 $("#price, #labelPrice").hide();
 $("#days, #labelDays").hide();
+$("#itemId2, #labelItemId2").hide();
 
 $("#updateItemSubmit").hide();
 
@@ -17,6 +18,7 @@ $("#submit").click(() => {
             type: "get",
             data: $("#myItemForm").serialize(),
             success: function(data) {
+                $("#itemId2, #labelItemId2").show();
                 $("#name, #labelName").show();
                 $("#brand, #labelBrand").show();
                 $("#category, #labelCategory").show();
@@ -25,6 +27,7 @@ $("#submit").click(() => {
                 $("#price, #labelPrice").show();
                 $("#days, #labelDays").show();
                 
+                $("#itemId2").val(data.response.itemIdConst);
                 $("#name").val(data.response.name);
                 $("#brand").val(data.response.brand);
                 $("#category").val(data.response.category);
