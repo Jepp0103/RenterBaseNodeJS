@@ -1,49 +1,47 @@
 <div style="text-align: center; padding-left: 1em;">
-
-    <h4>Current items created by user:</h4>
-    <p id = "myItems"></p>
-
-    <h4><i>Update specific rent item</i></h4>
-
-    <h4><i>Write id of item to update:</i></h4>
-    <form action="/myItems/:itemId" method="GET" id = "myItemForm" target="iframe">
-        <input name="itemId" type="number" id="itemId" value="Item id">
-        <input type="submit" value="Get item" id="submit" class="btn btn-primary"> <br>
-    </form>
-    <br>
-    <br>
-    <label for="labelName" id="labelName">Name</label>
-
-    <input name="name" type="text" id="name" class="form-control">
-        
-    <!-- <form action="/updateItem" method="POST" name="updateItem" style="padding-bottom: 1em;">
-        <div class="row">
-            <div class="col-sm">
-                <label for="name">Name of item:</label><br>
-                <input name="name"type="text" id="name" class="form-control"><br>
-
-                <label for="brand">Brand:</label><br>
-                <input name="brand" type="text" id="brand" class="form-control"><br>
-
-                <label for="category">Category:</label><br>
-                <input name="category" type="text" id="category" class="form-control"><br>
-
-                <label for="description">Description:</label><br>
-                <input name="description"type="text" id="description" class="form-control"><br>
-            </div>
-            <div class="col-sm">
-                <label for="age">Age:</label><br>
-                <input name="age"type="text" id="age" class="form-control"><br>
-
-                <label for="price">Price:</label><br>
-                <input name="price" type="number" id="price" class="form-control"><br>
-
-                <label for="days">Days to rent:</label><br>
-                <input name="days" type="number" id="days" class="form-control"><br>
-            </div>
+    <div class="row">
+        <div class="col-sm">
+            <h4>Current items created by user:</h4>
+            <p id = "myItems"></p>
         </div>
-        <input type="submit" value="Update item" class="btn btn-success"> <br>
-    </form> -->
+        
+        <div class="col-sm">
+            <h4><i>Write id of item to update:</i></h4>
+            <form action="/myItems/:itemId" method="GET" id = "myItemForm" target="iframe">
+                <input name="itemId" type="number" id="itemId" value="Item id">
+                <input type="submit" value="Get item" id="submit" class="btn btn-primary"> <br>
+            </form>
+                
+            <form action="/updateItem" method="POST" name="updateItem" style="padding-bottom: 1em;">
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="name" id = "labelName">Name of item:</label><br>
+                        <input name="name"type="text" id="name" class="form-control"><br>
+
+                        <label for="brand" id = "labelBrand">Brand:</label><br>
+                        <input name="brand" type="text" id="brand" class="form-control"><br>
+
+                        <label for="category" id = "labelCategory">Category:</label><br>
+                        <input name="category" type="text" id="category" class="form-control"><br>
+
+                        <label for="description" id = "labelDescription">Description:</label><br>
+                        <input name="description" type="text" id="description" class="form-control"><br>
+                    </div>
+                    <div class="col-sm">
+                        <label for="age" id = "labelAge">Age:</label><br>
+                        <input name="age"type="text" id="age" class="form-control"><br>
+
+                        <label for="price" id = "labelPrice">Price:</label><br>
+                        <input name="price" type="number" id="price" class="form-control"><br>
+
+                        <label for="days" id = "labelDays">Days to rent:</label><br>
+                        <input name="days" type="number" id="days" class="form-control"><br>
+                    </div>
+                </div>
+                <input type="submit" value="Update item" id = "updateItemSubmit" class="btn btn-success"> <br>
+            </form>
+        </div>
+    </div>
 </div>
 <iframe name="iframe" id="iframe" style="display: none;"></iframe>
 
