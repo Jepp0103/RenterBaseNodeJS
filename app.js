@@ -6,6 +6,7 @@ const session = require("express-session"); //Session middleware
 const socketio = require("socket.io");
 const io = socketio(messageServer);
 const formatMessage = require("./utils/messages.js");
+const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require("./utils/users");
 
 //Port 
 const PORT = process.argv[2];
@@ -40,6 +41,7 @@ const itemRouter = require("./routes/itemRouter.js");
 app.use(itemRouter);
 
 const rentChatRouter = require("./routes/rentChatRouter.js");
+const { user } = require("./config/mysqlCredentials.js");
 app.use(rentChatRouter);
 
 //Getting access to static files such as CSS, images, videos etc.
@@ -58,30 +60,55 @@ app.use(express.static(__dirname + "/public/account"));
 
 
 //Chat
-const adminName = "Admin";
+const bot = "Bot";
 
 //Establishing socket connection
 io.on("connection", socket => {
     socket.on("joinRoom", ({ username, room }) => {
-    
-    //Admin welcoming a current user
-    socket.emit("message", formatMessage(adminName, "Welcome to the chat!"));
+            const user = userJoin(socket.id, username, room);
 
-    //Emits to all users that a certain user has connected to the room - broadcast.
-    socket.broadcast.emit(
-        "message", 
-        formatMessage(adminName, "A user has joined the chat")
-        );
+            socket.join(user.room);
+
+        //Bot welcoming a current user
+        socket.emit("message", formatMessage(bot, "Welcome to the chat!"));
+
+        //Emits to all users that a certain user has connected to the room - broadcast.
+        socket.broadcast
+            .to(user.room)
+            .emit(
+                "message", 
+                formatMessage(bot, `${user.username} has joined the chat`)
+            );
+        
+        //Sending info about users and room
+        io.to(user.room).emit("roomUsers", {
+            room: user.room,
+            users: getRoomUsers(user.room)
+        });
     });
 
     //Listening for chat messages
     socket.on("chatMessage", msg => {
-        io.emit("message", formatMessage("USER", msg)); //Sending message back to the client on "message"
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit("message", formatMessage(user.username, msg)); //Sending message back to the client on "message"
     });
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        io.emit("message", formatMessage(adminName, "A user has left the chat"));
+        const user = userLeave(socket.id);
+
+        if (user) {
+            io.to(user.room).emit(
+                "message", 
+                formatMessage(bot, `${user.username} has left the chat`)
+            );
+
+            //Sending info about users and room
+            io.to(user.room).emit("roomUsers", {
+                room: user.room,
+                users: getRoomUsers(user.room)
+            });
+        }
     });
 });
 
