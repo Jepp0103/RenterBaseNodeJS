@@ -65,30 +65,34 @@ router.get("/deleteItem", (req, res) => {
 router.get("/myItems/:itemId", async (req, res) => {
     console.log("Item id query", req.query.itemId);
     req.params.itemId = req.query.itemId;
-    if (req.session.login) {
-        const item = await Item.query().select().where("itemId", req.params.itemId).andWhere("userId", req.session.userId); 
-        const itemIdConst = item[0].itemId;
-        const name = item[0].name;
-        const brand = item[0].brand;
-        const category = item[0].category;
-        const description = item[0].description;
-        const age = item[0].age;
-        const price = item[0].price;
-        const days = item[0].days;
-        console.log(item);
-        return res.send({ response: { 
-                itemIdConst,
-                name,
-                brand,
-                category,
-                description,
-                age,
-                price,
-                days
-            } 
-        }); //Response will be empty if the itemId doesn't exists
-    } else {
-        return res.redirect("/login");
+    try {
+        if (req.session.login) {
+            const item = await Item.query().select().where("itemId", req.params.itemId).andWhere("userId", req.session.userId); 
+            const itemIdConst = item[0].itemId;
+            const name = item[0].name;
+            const brand = item[0].brand;
+            const category = item[0].category;
+            const description = item[0].description;
+            const age = item[0].age;
+            const price = item[0].price;
+            const days = item[0].days;
+            console.log(item);
+            return res.send({ response: { 
+                    itemIdConst,
+                    name,
+                    brand,
+                    category,
+                    description,
+                    age,
+                    price,
+                    days
+                } 
+            }); //Response will be empty if the itemId doesn't exists
+        } else {
+            return res.redirect("/login");
+        }
+    } catch  (error) {
+        console.log(error);
     }
 });
 

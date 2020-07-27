@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const fileSystem = require("fs");
+const moment = require("moment");
+
 
 //GET methods
 router.get("/rentChat", (req, res) => {
@@ -14,11 +16,10 @@ router.get("/rentChat", (req, res) => {
 });
 
 router.get("/enterChat", (req, res) => {    
-    // const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
+    const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
     const enterChatPage = fileSystem.readFileSync("./public/rentChat/index.html", "utf-8");
-    // const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
-    // return res.send(navbarPage + enterChatPage + footerPage);
-    return res.send(enterChatPage);
+    const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
+    return res.send(navbarPage + enterChatPage + footerPage);
 });
 
 
@@ -29,7 +30,5 @@ router.get("/chat", (req, res) => {
     const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
     return res.send(navbarPage + rentChatPage + footerPage);
 });
-
-
 
 module.exports = router;

@@ -5,7 +5,7 @@ const messageServer = require("http").createServer(app);
 const session = require("express-session"); //Session middleware
 const socketio = require("socket.io");
 const io = socketio(messageServer);
-
+const formatMessage = require("./utils/messages.js");
 
 //Port 
 const PORT = process.argv[2];
@@ -56,22 +56,34 @@ app.use(express.static(__dirname + "/public/account"));
 //     });
 // });
 
-// //Establishing socket connection
-io.on("connection", socket => {
-    console.log("New connection");
 
-    socket.emit("message", "Welcome to ChatCord");
+//Chat
+const adminName = "Admin";
+
+//Establishing socket connection
+io.on("connection", socket => {
+    socket.on("joinRoom", ({ username, room }) => {
+    
+    //Admin welcoming a current user
+    socket.emit("message", formatMessage(adminName, "Welcome to the chat!"));
 
     //Emits to all users that a certain user has connected to the room - broadcast.
-    socket.broadcast.emit("message", "A user has joined the chat");
+    socket.broadcast.emit(
+        "message", 
+        formatMessage(adminName, "A user has joined the chat")
+        );
+    });
+
+    //Listening for chat messages
+    socket.on("chatMessage", msg => {
+        io.emit("message", formatMessage("USER", msg)); //Sending message back to the client on "message"
+    });
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        io.emit("message", "A user has left the chat");
+        io.emit("message", formatMessage(adminName, "A user has left the chat"));
     });
 });
-
-
 
 //Starting server
 messageServer.listen(PORT, (error) => {
