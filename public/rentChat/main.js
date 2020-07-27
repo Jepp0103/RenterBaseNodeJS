@@ -16,8 +16,8 @@ socket.emit("joinRoom", { username, room });
 
 //Getting room and users
 socket.on("roomUsers", ({ room, users }) => { //Arrow function passing the data
-    outputRoomName(room); //Passing in room
-    outputUsers(users); //Passing in users
+    outputRoomName(room); //Passing in room and outputting in sidebar
+    outputUsers(users); //Passing in users and outputting in sidebar
 });
 
 //Message from server
@@ -63,8 +63,8 @@ function outputRoomName(room) {
 }
 
 //Adding users to DOM - HTML
-function outputUsers(user) { //Mapping through the array of users
+function outputUsers(users) { //Mapping through the array of users
     userList.innerHTML = `
-    ${users.map(user => `<li>${user.username}</li>`).join("")} 
+        ${users.map(user => `<li>${user.username}</li>`).join("")} 
     `;
 }
