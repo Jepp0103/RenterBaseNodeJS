@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-	--dark-color-a: #667aff;
-	--dark-color-b: #7386ff;
+	--dark-color-a: #e3f2fd;
+	--dark-color-b: #b7dcf7;
 	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
@@ -17,7 +17,6 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	background: var(--light-color);
 	margin: 20px;
 }
 
@@ -29,17 +28,24 @@ a {
 	text-decoration: none;
 }
 
-.btn {
+p, li {
+	color: black;
+}
+
+
+
+.buttons {
 	cursor: pointer;
 	padding: 5px 15px;
-	background: var(--light-color);
-	color: var(--dark-color-a);
+	background-color: #b7dcf7;
+	color: black;
 	border: 0;
 	font-size: 17px;
 }
 
-/* Chat Page */
 
+
+/* Chat age */
 .chat-container {
 	max-width: 1100px;
 	background: #fff;
@@ -49,7 +55,6 @@ a {
 
 .chat-header {
 	background: var(--dark-color-a);
-	color: #fff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding: 15px;
@@ -61,11 +66,11 @@ a {
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
+	height: 400px
 }
 
 .chat-sidebar {
 	background: var(--dark-color-b);
-	color: #fff;
 	padding: 20px 20px 60px;
 	overflow-y: scroll;
 }

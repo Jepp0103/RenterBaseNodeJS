@@ -55,11 +55,10 @@ $.get("/username").done(data => {
     function outputMessage(message) {
         const div = document.createElement("div"); 
         div.classList.add("message");
-        div.innerHTML = `<p class="meta">${message.username}<span>${message.time}</span></p> 
+        div.innerHTML = `<p> <b>${message.username} <span>${message.time}</span></b></p> 
         <p class="text">
             ${message.text}
         </p>`;
-
         document.querySelector(".chat-messages").appendChild(div);  //Adding new div to chat messages.
     }
 
