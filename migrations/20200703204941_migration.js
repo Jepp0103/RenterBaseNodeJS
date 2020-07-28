@@ -14,7 +14,7 @@ exports.up = function(knex) {
     })
     .createTable("items", table => {
         table.increments("itemId");
-        table.string("name")
+        table.string("itemName")
         table.string("brand");
         table.string("category");
         table.string("description");
@@ -23,11 +23,17 @@ exports.up = function(knex) {
         table.integer("days");
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
         table.foreign("userId").references("users.id");
-    });
+    })
+    .createTable("rooms", table => {
+        table.increments("roomId"),
+        table.string("roomName"),
+        table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
+        table.foreign("userId").references("users.id");    })
 };
 
 exports.down = function(knex) {
     return knex.schema
+        .dropTableIfExists("rooms")
         .dropTableIfExists("items")
         .dropTableIfExists("users");
 };

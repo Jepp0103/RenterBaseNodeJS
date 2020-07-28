@@ -1,0 +1,32 @@
+	<section>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+			integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="chatStyle.css" />
+		<title>RentChat</title>
+		<div class="join-container">
+			<header class="join-header">
+				<h1>RentChat</h1>
+			</header>
+			<main class="join-main">
+				<form action="/rentChat">
+					<div class="form-control">
+						<select name="room" id="room">
+							<option value="none">Select room with specific item name</option>
+							<option value="Python">Python</option>
+							<option value="PHP">PHP</option>
+							<option value="C#">C#</option>
+							<option value="Ruby">Ruby</option>
+							<option value="Java">Java</option>
+						</select>
+					</div>
+					<br>
+					<button type="submit" class="btn">Join chat</button>
+				</form>
+			</main>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</section>
