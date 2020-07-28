@@ -18,7 +18,7 @@ router.get("/createItem", (req, res) => {
 router.get("/items", async (req, res) => {
     if (req.session.login) {
         const items = await Item.query().select();
-        const users = await User.query().select().withGraphFetched("items");
+        const users = await User.query().select();
         return res.send( { response: {
             items,
             users
