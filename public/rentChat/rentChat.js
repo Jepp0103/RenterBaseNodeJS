@@ -23,9 +23,18 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         $.get("/getMessagesByItemId/3").done(data => {
             for (let i = 0; i < data.response.messagesByItemId.length; i++) {
                 console.log(data.response.messagesByItemId[i].message);
-                $(".chat-messages").append(
-                    "div class=\"message\""
-                    "<p>" + data.response.messagesByItemId[i].message + "</p>"
+                $(".chat-messages").prepend(
+                    "<div class=\"message\">" + 
+                    "<p>" + 
+                        "<b>" + 
+                            "user" +
+                            "<span> time </span>" + 
+                        "</b>" + 
+                        "</p>" + 
+                        "<p class=\"text\">" + 
+                            data.response.messagesByItemId[i].message +
+                        "</p>" +
+                    "</div>"
                 );
             }
         
