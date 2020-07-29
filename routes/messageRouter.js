@@ -1,9 +1,6 @@
 const router = require("express").Router();
-const Message = require("../models/Message");
 const Item = require("../models/Item");
 const User = require("../models/User");
-
-
 
 //GET methods
 router.get("/messagesUsersItemsRooms", async (req, res) => {
@@ -12,6 +9,7 @@ router.get("/messagesUsersItemsRooms", async (req, res) => {
         "users.username",
         "items.itemId", 
         "itemName", 
+        "items.userId",
         "messageId", 
         "message");
     return res.send( { response: {

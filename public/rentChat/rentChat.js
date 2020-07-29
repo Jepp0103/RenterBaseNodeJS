@@ -8,14 +8,14 @@ const userList = document.getElementById("users");
 $.get("/username").done(data => { //Getting username with ajax call for the user currently signed in
     const username = data.response.username;
 
-    $.get("/itemsAndUsers").done(data => {
-        for (let i = 0; i < data.response.itemsAndUsers.length; i++) {
+    $.get("/messagesUsersItemsRooms").done(data => {
+        for (let i = 0; i < data.response.messagesUsersItemsRooms.length; i++) {
             $("#room").append(
                 "<option>" + 
-                "User: " + data.response.itemsAndUsers[i].username + 
-                ", User id: " + data.response.itemsAndUsers[i].userId + 
-                ", Item name: " + data.response.itemsAndUsers[i].itemName + 
-                ", Item id : " + data.response.itemsAndUsers[i].itemId + 
+                "Item name: " + data.response.messagesUsersItemsRooms[i].itemName + 
+                ", Item id : " + data.response.messagesUsersItemsRooms[i].itemId + 
+                ", User: " + data.response.messagesUsersItemsRooms[i].username + 
+                ", User id: " + data.response.messagesUsersItemsRooms[i].userId + 
                 "</option>"
             );
         }
