@@ -1,5 +1,5 @@
 const { Model } = require("objection");
-
+const Message = require("./Message.js");
 const User = require("./User.js");
 
 class Item extends Model {
@@ -12,6 +12,14 @@ class Item extends Model {
             join: {
                 from: "items.userId",
                 to: "users.id"
+            }
+        },
+        messages: { 
+            relation: Model.HasManyRelation, 
+            modelClass: Message,
+            join: {
+                from: "items.itemId",
+                to: "messages.itemId"
             }
         }
     }

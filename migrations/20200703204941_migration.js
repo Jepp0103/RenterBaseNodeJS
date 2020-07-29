@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   return knex.schema
     .createTable("users", table => {
@@ -24,11 +23,17 @@ exports.up = function(knex) {
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
         table.foreign("userId").references("users.id");
     })
+    .createTable("messages", table => {
+        table.increments("messageId");
+        table.string("message");
+        table.integer("itemId").unsigned().notNullable();
+        table.foreign("itemId").references("items.itemId");
+    })
 };
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists("rooms")
+        .dropTableIfExists("messages")
         .dropTableIfExists("items")
         .dropTableIfExists("users");
 };

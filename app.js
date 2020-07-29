@@ -40,6 +40,9 @@ app.use(authRouter);
 const itemRouter = require("./routes/itemRouter.js");
 app.use(itemRouter);
 
+const messageRouter = require("./routes/messageRouter.js")
+app.use(messageRouter);
+
 const rentChatRouter = require("./routes/rentChatRouter.js");
 const { user } = require("./config/mysqlCredentials.js");
 app.use(rentChatRouter);

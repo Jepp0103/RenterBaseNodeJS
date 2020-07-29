@@ -18,17 +18,16 @@ router.get("/createItem", (req, res) => {
 router.get("/itemsAndUsers", async (req, res) => {
     if (req.session.login) { 
         const itemsAndUsers = await User.query().joinRelated("items").select(
-        "userId", 
-        "username", 
-        "itemId",
-        "itemName", 
-        "brand", 
-        "category", 
-        "description",  
-        "itemAge",
-        "days",
-        "price");
-        console.log(itemsAndUsers);
+            "userId", 
+            "username", 
+            "itemId",
+            "itemName", 
+            "brand", 
+            "category", 
+            "description",  
+            "itemAge",
+            "days",
+            "price");
         return res.send( { response: {
             itemsAndUsers
         }});

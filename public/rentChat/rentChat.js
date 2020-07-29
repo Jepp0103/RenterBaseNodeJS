@@ -25,7 +25,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         });
 
         //Defining the socket
-        const socket = io();
+        const socket = io.connect("192.168.0.34:3000");
 
         //Joining chatroom
         socket.emit("joinRoom", { username, room });
