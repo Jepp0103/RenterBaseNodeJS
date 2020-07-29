@@ -5,7 +5,7 @@ $.get("/accountData").done(data => {
     $("#address").val(data.response.address);
     $("#city").val(data.response.city);
     $("#zipCode").val(data.response.zipCode);
-    $("#age").val(data.response.age);
+    $("#userAge").val(data.response.userAge);
 });
 
 

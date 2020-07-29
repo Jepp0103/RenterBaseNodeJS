@@ -15,13 +15,21 @@ router.get("/createItem", (req, res) => {
     }
 });
 
-router.get("/items", async (req, res) => {
-    if (req.session.login) {
-        const items = await Item.query().select();
-        const users = await User.query().select();
+router.get("/itemsAndUsers", async (req, res) => {
+    if (req.session.login) { 
+        const itemsAndUsers = await User.query().joinRelated("items").select(
+        "userId", 
+        "username", 
+        "itemId",
+        "itemName", 
+        "brand", 
+        "category", 
+        "description",  
+        "itemAge",
+        "price");
+        console.log(itemsAndUsers);
         return res.send( { response: {
-            items,
-            users
+            itemsAndUsers
         }});
     } else {
         return res.redirect("/login");
@@ -35,11 +43,11 @@ router.get("/myItems", async (req, res) => {
             select(
                 "item_id",
                 "user_id",
-                "name", 
+                "itemName", 
                 "brand", 
                 "category", 
                 "description", 
-                "age", 
+                "itemAge", 
                 "price", 
                 "days")
                 .where("user_id", userId);
@@ -69,21 +77,21 @@ router.get("/myItems/:itemId", async (req, res) => {
         if (req.session.login) {
             const item = await Item.query().select().where("itemId", req.params.itemId).andWhere("userId", req.session.userId); 
             const itemIdConst = item[0].itemId;
-            const name = item[0].name;
+            const itemName = item[0].itemName;
             const brand = item[0].brand;
             const category = item[0].category;
             const description = item[0].description;
-            const age = item[0].age;
+            const itemAge = item[0].itemAge;
             const price = item[0].price;
             const days = item[0].days;
             console.log(item);
             return res.send({ response: { 
                     itemIdConst,
-                    name,
+                    itemName,
                     brand,
                     category,
                     description,
-                    age,
+                    itemAge,
                     price,
                     days
                 } 
@@ -110,18 +118,18 @@ router.get("/updateItem", (req, res) => {
 
 //POST methods
 router.post("/createItem", (req, res) => {
-    const { name, brand, category, description, age, price, days } = req.body;
+    const { itemName, brand, category, description, itemAge, price, days } = req.body;
     const userId = req.session.userId;
 
-    if (name && brand && category && description && age && price && days) {
+    if (itemName && brand && category && description && itemAge && price && days) {
         try {
             Item.query().insert({
                 userId, 
-                name, 
+                itemName, 
                 brand, 
                 category,
                 description,
-                age,
+                itemAge,
                 price,
                 days
             }).then(createdItem => {
@@ -136,11 +144,11 @@ router.post("/createItem", (req, res) => {
 router.post("/updateItem", (req, res) => {
     try {
         Item.query().where("userId", req.session.userId).andWhere("itemId", req.body.itemId2).update({
-            name: req.body.name,
+            itemName: req.body.itemName,
             brand: req.body.brand,
             category: req.body.category,
             description: req.body.description,
-            age: req.body.age,
+            itemAge: req.body.itemAge,
             price: req.body.price,
             days: req.body.days
         }).then(updatedItem => {

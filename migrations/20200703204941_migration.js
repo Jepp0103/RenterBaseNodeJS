@@ -9,7 +9,7 @@ exports.up = function(knex) {
         table.string("address");
         table.string("city");
         table.string("zipCode");
-        table.integer("age");
+        table.integer("userAge");
         table.timestamp("createdAt").defaultTo(knex.fn.now());
     })
     .createTable("items", table => {
@@ -18,17 +18,12 @@ exports.up = function(knex) {
         table.string("brand");
         table.string("category");
         table.string("description");
-        table.integer("age");
+        table.integer("itemAge");
         table.integer("price");
         table.integer("days");
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
         table.foreign("userId").references("users.id");
     })
-    .createTable("rooms", table => {
-        table.increments("roomId"),
-        table.string("roomName"),
-        table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
-        table.foreign("userId").references("users.id");    })
 };
 
 exports.down = function(knex) {

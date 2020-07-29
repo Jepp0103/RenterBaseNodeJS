@@ -10,8 +10,8 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
     $.get("/items").done(data => {
         for (let i = 0; i < data.response.items.length; i++) {
-            $("#room").prepend(
-                "<option>" + data.response.items[i].name + "</option>"
+            $("#room").append(
+                "<option>" + data.response.items[i].name + ", item id:" + data.response.items[i].itemId + ", user id: " + data.response.us + "</option>"
             )
         }
      

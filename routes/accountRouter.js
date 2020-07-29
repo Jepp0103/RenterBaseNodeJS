@@ -25,12 +25,12 @@ router.get("/updateAccount", (req, res) => {
 
 router.get("/accountData", async (req, res) => {
     if (req.session.login) {
-        const accountInfo = await User.query().select("username", "address", "city", "zip_code", "age", "email").where("id", req.session.userId);
+        const accountInfo = await User.query().select("username", "address", "city", "zip_code", "userAge", "email").where("id", req.session.userId);
         const username = accountInfo[0].username;
         const address = accountInfo[0].address;
         const city = accountInfo[0].city;
         const zipCode = accountInfo[0].zipCode;
-        const age = accountInfo[0].age;
+        const userAge = accountInfo[0].userAge;
         const email = accountInfo[0].email;
         return res.send( { response: {
             username: username,
@@ -61,9 +61,9 @@ router.post("/createAccount", (req, res) => {
             address, 
             city, 
             zipCode, 
-            age } = req.body;
+            userAge } = req.body;
     
-    if(username && password && email && address && city && zipCode && age) {
+    if(username && password && email && address && city && zipCode && userAge) {
         if(password.length < 8) {
             return res.status(400).send({ response: "Length of password must be 8 characters long and have an uppercase start letter."})
         } else {
@@ -79,7 +79,7 @@ router.post("/createAccount", (req, res) => {
                                 address,
                                 city,
                                 zipCode,
-                                age,
+                                userAge,
                                 email                                
                             }).then(createdAccount => {
                                 return res.redirect("/login");
@@ -103,12 +103,12 @@ router.post("/updateAccount", async (req, res) => {
             address,
             city, 
             zipCode,
-            age,
+            userAge,
             email } = req.body;
     try {
-        if (username && newPassword && currentPassword && address && city && zipCode && age && email) {
+        if (username && newPassword && currentPassword && address && city && zipCode && userAge && email) {
 
-            const accountInfo = await User.query().select("id", "username", "password", "address", "city", "zip_code", "age", "email")
+            const accountInfo = await User.query().select("id", "username", "password", "address", "city", "zip_code", "userAge", "email")
             .where("id", req.session.userId);
 
             if (accountInfo.length === 1) {
@@ -121,14 +121,14 @@ router.post("/updateAccount", async (req, res) => {
                                 address: req.body.address,
                                 city: req.body.city,
                                 zip_code: req.body.zipCode,
-                                age: req.body.age,
+                                userAge: req.body.userAge,
                                 email: req.body.email
                             }).then(updatedAccount => {
                                 req.session.username = username;
                                 req.session.address = address;
                                 req.session.city = city;
                                 req.session.zipCode = zipCode;
-                                req.session.age = age;
+                                req.session.userAge = userAge;
                                 req.session.email = email;
                                 return res.redirect("/updateAccount");
                             })
