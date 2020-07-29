@@ -8,10 +8,15 @@ const userList = document.getElementById("users");
 $.get("/username").done(data => { //Getting username with ajax call for the user currently signed in
     const username = data.response.username;
 
-    $.get("/items").done(data => {
-        for (let i = 0; i < data.response.items.length; i++) {
+    $.get("/itemsAndUsers").done(data => {
+        for (let i = 0; i < data.response.itemsAndUsers.length; i++) {
             $("#room").append(
-                "<option>" + data.response.items[i].name + ", item id:" + data.response.items[i].itemId + ", user id: " + data.response.us + "</option>"
+                "<option>" + 
+                "User: " + data.response.itemsAndUsers[i].username + 
+                ", User id: " + data.response.itemsAndUsers[i].userId + 
+                ", Item name: " + data.response.itemsAndUsers[i].itemName + 
+                ", Item id : " + data.response.itemsAndUsers[i].itemId + 
+                "</option>"
             )
         }
      

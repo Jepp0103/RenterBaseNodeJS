@@ -26,6 +26,7 @@ router.get("/itemsAndUsers", async (req, res) => {
         "category", 
         "description",  
         "itemAge",
+        "days",
         "price");
         console.log(itemsAndUsers);
         return res.send( { response: {

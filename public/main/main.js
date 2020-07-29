@@ -9,6 +9,7 @@ $.get("/itemsAndUsers").done(data => {
             "<b>Category:</b> " + data.response.itemsAndUsers[i].category + "<br>" + 
             "<b>Description:</b> " + data.response.itemsAndUsers[i].description + "<br>" + 
             "<b>Age:</b> " + data.response.itemsAndUsers[i].itemAge + "<br>" + 
+            "<b>Days to rent:</b> " + data.response.itemsAndUsers[i].days + "<br>" + 
             "<b>Price:</b> " + data.response.itemsAndUsers[i].price + " DKK<br>" + 
             "</p> </form> <br>");
     }
