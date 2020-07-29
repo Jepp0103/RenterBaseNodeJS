@@ -1,17 +1,21 @@
 const router = require("express").Router();
 const Message = require("../models/Message");
 const Item = require("../models/Item");
+const User = require("../models/User");
+
 
 
 //GET methods
-router.get("/messagesAndItemsRooms", async (req, res) => {
-    const messagesAndItemsRooms = await Item.query().joinRelated("messages").select(
+router.get("/messagesUsersItemsRooms", async (req, res) => {
+    const messagesUsersItemsRooms = await User.query().joinRelated("items").joinRelated("messages").select(
+        "users.id",
+        "users.username",
         "items.itemId", 
         "itemName", 
         "messageId", 
         "message");
     return res.send( { response: {
-        messagesAndItemsRooms
+        messagesUsersItemsRooms
     }});
 }); 
 

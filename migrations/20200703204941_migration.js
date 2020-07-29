@@ -22,12 +22,15 @@ exports.up = function(knex) {
         table.integer("days");
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
         table.foreign("userId").references("users.id");
+
     })
     .createTable("messages", table => {
         table.increments("messageId");
         table.string("message");
         table.integer("itemId").unsigned().notNullable();
         table.foreign("itemId").references("items.itemId");
+        table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values
+        table.foreign("userId").references("users.id");
     })
 };
 
