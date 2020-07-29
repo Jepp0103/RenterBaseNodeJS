@@ -16,15 +16,12 @@ router.get("/messagesAndItemsRooms", async (req, res) => {
 }); 
 
 router.get("/getMessagesByItemId/:itemId", async (req, res) => {
-    console.log("Itemid param get message", req.params.itemId);
-
     const messagesByItemId = await Item.query().joinRelated("messages").select(
         "items.itemId", 
         "itemName", 
         "messageId", 
         "message",
-        "messages.itemId")
-        .where("items.itemId", req.params.itemId);
+        "messages.itemId").where("items.itemId", req.params.itemId);
     
     return res.send({ response: { 
         messagesByItemId 
