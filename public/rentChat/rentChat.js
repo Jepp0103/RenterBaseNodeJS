@@ -20,6 +20,14 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             );
         }
 
+        const room = objToString(Qs.parse(location.search, {
+                ignoreQueryPrefix: true
+        }));
+
+        console.log("Room plz work", room);
+
+
+
         // $("#roomSelect").change(function() {
         //     let choosenItemId  = $('#roomSelect option:selected').attr("id");
         //     console.log("Choosen item id", choosenItemId);
@@ -44,11 +52,6 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                         );
                     }
                 
-                
-                    const { room } = Qs.parse(location.search, {
-                        ignoreQueryPrefix: true
-                    });
-
                     //Defining the socket
                     const socket = io.connect("192.168.8.106:3000");
 
@@ -111,7 +114,16 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                         `;
                     }
                 });
-        //     });
+
+                function objToString(obj) {
+                    var str = '';
+                    for (var p in obj) {
+                        if (obj.hasOwnProperty(p)) {
+                            str += p + '::' + obj[p] + '\n';
+                        }
+                    }
+                    return str;
+                }
         // });
     });
 });
