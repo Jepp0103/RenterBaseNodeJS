@@ -35,7 +35,7 @@ router.get("/itemsAndUsers", async (req, res) => {
     } else {
         return res.redirect("/login");
     }
-});
+}); 
 
 router.get("/myItems", async (req, res) => {
     if(req.session.login) {

@@ -37,7 +37,7 @@ router.get("/accountData", async (req, res) => {
             address: address,
             city: city,
             zipCode: zipCode,
-            age: age,
+            userAge: userAge,
             email: email
         }});
     } else {
