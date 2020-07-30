@@ -8,21 +8,24 @@ const userList = document.getElementById("users");
 $.get("/username").done(data => { //Getting username with ajax call for the user currently signed in
     const username = data.response.username;
 
-    $.get("/messagesUsersItemsRooms").done(data => {
-        for (let i = 0; i < data.response.messagesUsersItemsRooms.length; i++) {
+    $.get("/itemsAndUsers").done(data => {
+        for (let i = 0; i < data.response.itemsAndUsers.length; i++) {
             $("#room").append(
-                "<option>" + 
-                "Item name: " + data.response.messagesUsersItemsRooms[i].itemName + 
-                ", Item id : " + data.response.messagesUsersItemsRooms[i].itemId + 
-                ", User: " + data.response.messagesUsersItemsRooms[i].username + 
-                ", User id: " + data.response.messagesUsersItemsRooms[i].userId + 
+                "<option id = \"item" + data.response.itemsAndUsers[i].itemId + "\">" +
+                "Item name: " + data.response.itemsAndUsers[i].itemName + 
+                ", Item id : " + data.response.itemsAndUsers[i].itemId + 
+                ", User: " + data.response.itemsAndUsers[i].username + 
+                ", User id: " + data.response.itemsAndUsers[i].userId + 
                 "</option>"
             );
         }
 
-        $.get("/getMessagesByItemId/3").done(data => {
-            for (let i = 0; i < data.response.messagesByItemId.length; i++) {
-                console.log(data.response.messagesByItemId[i].message);
+        
+
+        // console.log("messageItemUserId", $("#messageItemUserId").text());
+        $.get("/messagesAndUsersByItemId/3").done(data => {
+            for (let i = 0; i < data.response.messagesAndUsersByItemId.length; i++) {
+                console.log(data.response.messagesAndUsersByItemId[i].message);
                 $(".chat-messages").prepend(
                     "<div class=\"message\">" + 
                     "<p>" + 
@@ -32,7 +35,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                         "</b>" + 
                         "</p>" + 
                         "<p class=\"text\">" + 
-                            data.response.messagesByItemId[i].message +
+                            data.response.messagesAndUsersByItemId[i].message +
                         "</p>" +
                     "</div>"
                 );

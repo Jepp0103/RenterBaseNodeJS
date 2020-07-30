@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Item = require("../models/Item.js");
 const fileSystem = require("fs");
 const User = require("../models/User.js");
+const Message = require("../models/Message.js");
 
 //GET methods
 router.get("/createItem", (req, res) => {
@@ -160,11 +161,12 @@ router.post("/updateItem", (req, res) => {
 });
 
 //Deleting items
-router.post("/deleteItem", (req, res) => {
+router.post("/deleteItem", async (req, res) => {
     if (req.session.login) {
         console.log("Deleted item id", req.body.deletedItemId);
         try {
-            Item.query().delete().where("itemId", req.body.deletedItemId)
+            await Message.query().delete().where("itemId", req.body.deletedItemId); //Deleting existing messages before parent row in items can be deleted.
+            await Item.query().delete().where("itemId", req.body.deletedItemId)
             .then(deletedItem => {
                 return res.redirect("/deleteItem")
             });

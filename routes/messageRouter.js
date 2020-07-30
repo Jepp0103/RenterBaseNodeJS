@@ -11,22 +11,23 @@ router.get("/messagesUsersItemsRooms", async (req, res) => {
         "itemName", 
         "items.userId",
         "messageId", 
-        "message");
+        "message").distinct();
     return res.send( { response: {
         messagesUsersItemsRooms
     }});
 }); 
 
-router.get("/getMessagesByItemId/:itemId", async (req, res) => {
-    const messagesByItemId = await Item.query().joinRelated("messages").select(
+router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
+    const messagesAndUsersByItemId = await User.query().joinRelated("items").joinRelated("messages").select(
+        "users.id",
+        "username",
         "items.itemId", 
         "itemName", 
         "messageId", 
         "message",
         "messages.itemId").where("items.itemId", req.params.itemId);
-    
     return res.send({ response: { 
-        messagesByItemId 
+        messagesAndUsersByItemId 
     }});
 });
 
