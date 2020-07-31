@@ -12,8 +12,8 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         for (let i = 0; i < data.response.itemsAndUsers.length; i++) {
             $("#roomSelect").append(
                 "<option id = "  + data.response.itemsAndUsers[i].itemId + ">" +
-                "Item name: " + data.response.itemsAndUsers[i].itemName + 
-                ", Item id : <p>" + data.response.itemsAndUsers[i].itemId + "</p>" + 
+                 data.response.itemsAndUsers[i].itemName + 
+                ", Item id: " + data.response.itemsAndUsers[i].itemId + 
                 ", User: " + data.response.itemsAndUsers[i].username + 
                 ", User id: " + data.response.itemsAndUsers[i].userId + 
                 "</option>"
@@ -53,7 +53,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                     }
                 
                     //Defining the socket
-                    const socket = io.connect("192.168.8.106:3000");
+                    const socket = io.connect("172.17.81.81:3000");
 
                     //Joining chatroom
                     socket.emit("joinRoom", { username, room });
