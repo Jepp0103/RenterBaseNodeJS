@@ -25,33 +25,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }));
 
         console.log("Room plz work", room);
-
-
-
-        // $("#roomSelect").change(function() {
-        //     let choosenItemId  = $('#roomSelect option:selected').attr("id");
-        //     console.log("Choosen item id", choosenItemId);
-            
-        //     // $("#joinChatButton").click(() => {
-                $.get("/messagesAndUsersByItemId/3").done(data => {
-                    // console.log("Choosen item id chat page", choosenItemId);
-                    for (let i = 0; i < data.response.messagesAndUsersByItemId.length; i++) {
-                        console.log(data.response.messagesAndUsersByItemId[i].message);
-                        $(".chat-messages").prepend(
-                            "<div class=\"message\">" + 
-                            "<p>" + 
-                                "<b>" + 
-                                    "user" +
-                                    "<span> time </span>" + 
-                                "</b>" + 
-                                "</p>" + 
-                                "<p class=\"text\">" + 
-                                    data.response.messagesAndUsersByItemId[i].message +
-                                "</p>" +
-                            "</div>"
-                        );
-                    }
-                
+              
                     //Defining the socket
                     const socket = io.connect("172.17.81.81:3000");
 
@@ -115,15 +89,43 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                     }
                 });
 
-                function objToString(obj) {
-                    var str = '';
-                    for (var p in obj) {
-                        if (obj.hasOwnProperty(p)) {
-                            str += p + '::' + obj[p] + '\n';
-                        }
-                    }
-                    return str;
-                }
-        // });
-    });
+                $("#roomSelect").change(function() {
+                    let choosenItemId  = $('#roomSelect option:selected').attr("id");
+                    
+                    $("#joinChatButton").click(() => {
+                        $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => {
+                            console.log("Choosen item id chat page", choosenItemId);
+                            for (let i = 0; i < data.response.messagesAndUsersByItemId.length; i++) {
+                                console.log("Saved messages:", data.response.messagesAndUsersByItemId[i].message);
+                                // $(".chat-messages").append(
+                                //     "<div class=\"message\">" + 
+                                //     "<p>" + 
+                                //         "<b>" + 
+                                //             "user" +
+                                //             "<span> time </span>" + 
+                                //         "</b>" + 
+                                //         "</p>" + 
+                                //         "<p class=\"text\">" + 
+                                //             data.response.messagesAndUsersByItemId[i].message +
+                                //         "</p>" +
+                                //     "</div>"
+                                // );
+
+                                $("#users").append(
+                                    "<li>" + "Ejner" + "</li>"
+                                );
+                            }
+                        });    
+                    });
+                });
+
+    function objToString(obj) {
+        var str = '';
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str += p + '::' + obj[p] + '\n';
+            }
+        }
+        return str;
+    }
 });
