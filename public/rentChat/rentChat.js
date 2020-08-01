@@ -25,7 +25,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }));
             
         //Defining the socket
-        const socket = io.connect("172.17.81.81:3000");
+        const socket = io.connect("192.168.0.34:3000");
 
         //Joining chatroom
         socket.emit("joinRoom", { username, room });
@@ -95,18 +95,18 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
     // Item id to choose in dropdown
     $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => {
-        for (let i = 0; i < data.response.messagesAndUsersByItemId.length; i++) {
-            console.log("Saved messages:", data.response.messagesAndUsersByItemId[i].message);
+        for (let i = 0; i < data.response.messagesByItemId.length; i++) {
+            console.log("Saved messages:", data.response.messagesByItemId[i].message);
             $(".chat-messages").append(
                 "<div class=\"message\">" + 
-                // "<p>" + 
-                //     "<b>" + 
-                //         // data.response.messagesAndUsersByItemId[i].username +
-                //         "<span> time </span>" + 
-                //     "</b>" + 
-                //     "</p>" + 
+                "<p>" + 
+                    "<b>" + 
+                        data.response.usersByMessages[i].username +
+                        "<span> time </span>" + 
+                    "</b>" + 
+                    "</p>" + 
                     "<p class=\"text\">" + 
-                        data.response.messagesAndUsersByItemId[i].message +
+                        data.response.messagesByItemId[i].message +
                     "</p>" +
                 "</div>"
             );
