@@ -102,7 +102,6 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                 "<p>" + 
                     "<b>" + 
                         data.response.usersByMessages[i].username +
-                        "<span> time </span>" + 
                     "</b>" + 
                     "</p>" + 
                     "<p class=\"text\">" + 

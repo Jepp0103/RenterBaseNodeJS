@@ -35,16 +35,36 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
         "messages.itemId",
     ).where("messages.itemId", req.params.itemId);
     
-    console.log("usersbymessages", usersByMessages);
-
     return res.send({ response: { 
         messagesByItemId,
         usersByMessages
     }});
 });
 
+router.post("/messagesAndUsersByItemId", (req, res) => {
+    const message = req.body.msg;
+    const itemId = 6;
+    const userId = req.session.userId;
+
+    console.log("req.body", req.body);
 
 
+    console.log("msg", message);
+    
+        if (message) {
+            try {
+                Message.query().insert({
+                    message,
+                    itemId, 
+                    userId
+                }).then(createdMessage => {
+                    return res.redirect("/home");
+                });   
+            } catch {
+                return res.status(500).send({ response: "Something went wrong with the DB" });  
+            }
+        }
+});
 
 
 module.exports = router;

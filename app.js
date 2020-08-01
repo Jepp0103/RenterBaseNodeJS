@@ -44,8 +44,9 @@ const messageRouter = require("./routes/messageRouter.js")
 app.use(messageRouter);
 
 const rentChatRouter = require("./routes/rentChatRouter.js");
-const { user } = require("./config/mysqlCredentials.js");
 app.use(rentChatRouter);
+
+const { user } = require("./config/mysqlCredentials.js");
 
 //Getting access to static files such as CSS, images, videos etc.
 app.use(express.static(__dirname + "/public"));
@@ -53,14 +54,6 @@ app.use(express.static(__dirname + "/public/rentChat"));
 app.use(express.static(__dirname + "/public/item"));
 app.use(express.static(__dirname + "/public/navbar"));
 app.use(express.static(__dirname + "/public/account"));
-
-// //Establishing socket connection
-// io.on("connection", socket => {
-//     socket.on("Message from user:", (data) => {
-//         io.emit("User:", { message: data.message }); 
-//     });
-// });
-
 
 //Chat
 const bot = "Bot";

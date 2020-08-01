@@ -17,9 +17,10 @@
       <div class="chat-messages"></div>
     </main>
     <div class="chat-form-container">
-      <form id="chat-form">
-        <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off"/>
-        <button class="buttons"><i class="fas fa-paper-plane"></i>Send</button>
+      <form action="/messagesAndUsersByItemId" method="POST" id="chat-form">
+        <input name = "msg" id="msg" type="text" placeholder="Enter Message"/>
+        <input name = "create" type="submit" value="Send" class="buttons">
+        <!-- <i class="fas fa-paper-plane"></i> -->
       </form>
     </div>
   </div>
