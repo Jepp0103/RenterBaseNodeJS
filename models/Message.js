@@ -16,6 +16,7 @@ class Message extends Model {
                 to: "items.itemId"
             }
         },
+        
         users: {
             relation: Model.BelongsToOneRelation,
             modelClass: User,
