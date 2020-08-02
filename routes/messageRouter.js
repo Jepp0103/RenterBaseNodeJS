@@ -21,6 +21,7 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
     console.log("req.params", req.params.itemId);
     const messagesByItemId = await Item.query().joinRelated("messages").select(
         "messageId",
+        "time",
         "message",
         "items.itemId", 
         "messages.userId",
@@ -45,6 +46,7 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
 router.post("/addMessage", (req, res) => {
     if (req.session.login) {
         //Getting all values from jQuery ajax call
+        const time = req.body.time;
         const message = req.body.newMsg;
         const itemId = req.body.itemId;
         const userId = req.session.userId;   
@@ -52,6 +54,7 @@ router.post("/addMessage", (req, res) => {
             try {
                 Message.query().insert({
                     message,
+                    time,
                     itemId,
                     userId
                 }).then(addedMessage => {

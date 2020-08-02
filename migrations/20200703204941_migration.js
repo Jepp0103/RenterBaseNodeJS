@@ -27,7 +27,7 @@ exports.up = function(knex) {
     .createTable("messages", table => {
         table.increments("messageId");
         table.string("message");
-        table.string("date");
+        table.string("time");
         table.integer("itemId").unsigned().notNullable();
         table.foreign("itemId").references("items.itemId");
         table.integer("userId").unsigned().notNullable(); //Unsigned - no negative values

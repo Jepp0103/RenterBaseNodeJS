@@ -64,7 +64,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         function outputMessage(message) {
             const div = document.createElement("div"); 
             div.classList.add("message");
-            div.innerHTML = `<p> <b>${message.username} <span id = "messageTime">${message.time}</span></b></p> 
+            div.innerHTML = `<p> <b>${message.username}</b> <span>${message.time}</span></p> 
             <p class="text">
                 ${message.text}
             </p>`;
@@ -100,12 +100,12 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             $(".chat-messages").append(
                 "<div class=\"message\">" + 
                 "<p>" + 
-                    "<b>" + 
-                        data.response.usersByMessages[i].username +
-                    "</b>" + 
+                    "<b> Id of user: " + data.response.messagesByItemId[i].userId + " (saved name not implemented)</b>" +
+                    // "<b>" + data.response.messagesByItemId[i].username + "</b>" +
+                    "<span>" + data.response.messagesByItemId[i].time + "</span>" +
                     "</p>" + 
                     "<p class=\"text\">" + 
-                        data.response.messagesByItemId[i].message +
+                        data.response.messagesByItemId[i].message +  
                     "</p>" +
                 "</div>"
             );
@@ -114,10 +114,9 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
     $("#addMessageButton").click(() => {
         console.log("new Message: ", $("#msg").val());
-        const date = new Date()
-        const messageDate = date.getDate()
-        const messageYear = date.getFullYear();
-        console.log("message time post: ", messageDate, messageYear);
+        //Setting up date and time for new messages.
+        const date = new Date();
+        const fullDate = "   " + date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
         const newMessage = $("#msg").val();
         console.log("new message itemId", choosenItemId);
         $("#chat-form").submit(function(e) {
@@ -126,10 +125,11 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                 url: "/addMessage",
                 type: "post",
                 data: ({ newMsg: newMessage,
+                         time: fullDate,
                          itemId: choosenItemId }), 
             });
-        })
-    })
+        });
+    });
 
     function objToString(obj) {
         var str = '';
