@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Item = require("../models/Item");
 const User = require("../models/User");
-const Message = require("../models/User");
+const Message = require("../models/Message");
 
 
 //GET methods
@@ -41,29 +41,34 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
     }});
 });
 
-router.post("/messagesAndUsersByItemId", (req, res) => {
-    const message = req.body.msg;
-    const itemId = 6;
-    const userId = req.session.userId;
+router.post("/addMessage", (req, res) => {
+    if (req.session.login) {
+        const message = req.body.msg;
+        const itemId = req.body.newItemId;
+        const userId = req.session.userId;
+        
+        console.log("newMessage add message", message);
+        console.log("item id add message", itemId);
 
-    console.log("req.body", req.body);
-
-
-    console.log("msg", message);
+        console.log("userId add message", userId);
     
-        if (message) {
+        if (message && itemId && userId) {
             try {
                 Message.query().insert({
                     message,
-                    itemId, 
-                    userId
+                    itemId,
+                    userId,
                 }).then(createdMessage => {
-                    return res.redirect("/home");
+                    return res.redirect("/rentChat");
                 });   
-            } catch {
+            } catch (error) {
                 return res.status(500).send({ response: "Something went wrong with the DB" });  
             }
         }
+
+    } else {
+        return res.redirect("/login");
+    }
 });
 
 
