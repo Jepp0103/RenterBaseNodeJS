@@ -46,6 +46,9 @@ app.use(messageRouter);
 const rentChatRouter = require("./routes/rentChatRouter.js");
 app.use(rentChatRouter);
 
+const mailRoute = require("./routes/mailRouter.js");
+app.use(mailRoute);
+
 const { user } = require("./config/mysqlCredentials.js");
 
 //Getting access to static files such as CSS, images, videos etc.
