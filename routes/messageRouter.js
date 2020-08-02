@@ -58,9 +58,7 @@ router.post("/addMessage", (req, res) => {
                     message,
                     itemId,
                     userId,
-                }).then(createdMessage => {
-                    return res.redirect("/rentChat");
-                });   
+                });
             } catch (error) {
                 return res.status(500).send({ response: "Something went wrong with the DB" });  
             }

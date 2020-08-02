@@ -17,12 +17,18 @@
       <div class="chat-messages"></div>
     </main>
     <div class="chat-form-container">
-      <form action="/rentChat" method="POST" id="chat-form">
-        <input name = "msg" id="msg" type="text" placeholder="Enter Message"/>
-        <input name = "create" type="submit" value="Send" class="buttons">
-        <!-- <i class="fas fa-paper-plane"></i> -->
+      <form action="/addMessage" method="POST" name="/addMessage" id="chat-form">
+        <input name ="msg" type="text" id="msg"  placeholder="Enter Message" required/>
+        <input id = "submitButton" type="submit" name = "addMessage" value="Send" class="buttons">
+        <!-- <i class="fas fa-paper-plane"></i>  USE JQUERY TO RECEIVE THE MESSAGE--> 
       </form>
     </div>
+  </div>
+  <div>
+    <form action="/addMessage" method="POST" name="/addMessage" id="chat-form">
+      <input name ="msg" type="text" id="msg"  placeholder="Enter Message" required/>
+      <input id = "submitButton" type="submit" name = "addMessage" value="Send" class="buttons">
+    </form>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" crossorigin="anonymous"></script>  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
