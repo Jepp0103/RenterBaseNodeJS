@@ -41,29 +41,26 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
     }});
 });
 
+//Post methods
 router.post("/addMessage", (req, res) => {
     if (req.session.login) {
-        const message = req.body.msg;
-        const itemId = req.body.newItemId;
-        const userId = req.session.userId;
-        
-        console.log("newMessage add message", message);
-        console.log("item id add message", itemId);
-
-        console.log("userId add message", userId);
-    
+        //Getting all values from jQuery ajax call
+        const message = req.body.newMsg;
+        const itemId = req.body.itemId;
+        const userId = req.session.userId;   
         if (message && itemId && userId) {
             try {
                 Message.query().insert({
                     message,
                     itemId,
-                    userId,
-                });
+                    userId
+                }).then(addedMessage => {
+                    console.log("Message,", message, ", added.");
+                });  
             } catch (error) {
                 return res.status(500).send({ response: "Something went wrong with the DB" });  
             }
         }
-
     } else {
         return res.redirect("/login");
     }

@@ -64,10 +64,11 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         function outputMessage(message) {
             const div = document.createElement("div"); 
             div.classList.add("message");
-            div.innerHTML = `<p> <b>${message.username} <span>${message.time}</span></b></p> 
+            div.innerHTML = `<p> <b>${message.username} <span id = "messageTime">${message.time}</span></b></p> 
             <p class="text">
                 ${message.text}
             </p>`;
+
             document.querySelector(".chat-messages").appendChild(div);  //Adding new div to chat messages.
         }
 
@@ -86,12 +87,11 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }
     });
 
-    console.log("url", window.location.href);
     //Getting url in order achieve item id for getting and prepending the messages from the database to the HTML.
     let currentUrl = window.location.href;
     let choosenItemId = currentUrl.charAt(currentUrl.length - 1); //Item id is the last character of the url.
 
-        console.log("Choosen item id after", choosenItemId);
+    console.log("Choosen item id after", choosenItemId);
 
     // Item id to choose in dropdown
     $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => {
@@ -111,6 +111,25 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             );
         }
     });  
+
+    $("#addMessageButton").click(() => {
+        console.log("new Message: ", $("#msg").val());
+        const date = new Date()
+        const messageDate = date.getDate()
+        const messageYear = date.getFullYear();
+        console.log("message time post: ", messageDate, messageYear);
+        const newMessage = $("#msg").val();
+        console.log("new message itemId", choosenItemId);
+        $("#chat-form").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/addMessage",
+                type: "post",
+                data: ({ newMsg: newMessage,
+                         itemId: choosenItemId }), 
+            });
+        })
+    })
 
     function objToString(obj) {
         var str = '';

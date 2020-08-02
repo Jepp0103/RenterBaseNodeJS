@@ -61,9 +61,9 @@ const bot = "Bot";
 //Establishing socket connection
 io.on("connection", socket => {
     socket.on("joinRoom", ({ username, room }) => {
-            const user = userJoin(socket.id, username, room);
+        const user = userJoin(socket.id, username, room);
 
-            socket.join(user.room);
+        socket.join(user.room);
 
         //Bot welcoming a current user
         socket.emit("message", formatMessage(bot, "Welcome to the chat!"));

@@ -1,10 +1,13 @@
-const moment = require("moment");
+const date = new Date();
+const messageDate = date.getDate();
+const messageMonth = date.getMonth();
+const messageYear = date.getFullYear();
 
 function formatMessage(username, text) {
     return {
         username,
         text,
-        time: moment().format("h:mm a")
+        time: messageDate + "/" + messageMonth + "/" + messageYear
     }
 }
 
