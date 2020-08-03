@@ -115,7 +115,6 @@ router.get("/updateItem", (req, res) => {
     }
 });
 
-
 //POST methods
 router.post("/createItem", (req, res) => {
     const { itemName, brand, category, description, itemAge, price, days } = req.body;

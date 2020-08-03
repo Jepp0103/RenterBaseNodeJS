@@ -15,6 +15,10 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                  data.response.itemsAndUsers[i].itemName + 
                 ", User: " + data.response.itemsAndUsers[i].username + 
                 ", User id: " + data.response.itemsAndUsers[i].userId + 
+                ", Price: " + data.response.itemsAndUsers[i].price + " DKK" +
+                ", Brand: " + data.response.itemsAndUsers[i].brand +
+                ", Category: " + data.response.itemsAndUsers[i].category +
+                ", Days to rent: " + data.response.itemsAndUsers[i].days +
                 ", Item id: " + data.response.itemsAndUsers[i].itemId + 
                 "</option>"
             );
