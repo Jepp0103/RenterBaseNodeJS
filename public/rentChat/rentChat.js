@@ -100,8 +100,8 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             $(".chat-messages").append(
                 "<div class=\"message\">" + 
                 "<p>" + 
-                    "<b> Id of user: " + data.response.messagesByItemId[i].userId + "</b>" +
-                    // "<b>" + data.response.messagesByItemId[i].username + "</b>" +
+                    // "<b> Id of user: " + data.response.messagesByItemId[i].userId + "</b>" +
+                    "<b>" + data.response.usersByMessages[i].username + "</b>" +
                     "<span>" + data.response.messagesByItemId[i].time + "</span>" +
                     "</p>" + 
                     "<p class=\"text\">" + 

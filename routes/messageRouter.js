@@ -34,7 +34,7 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
         "messageId",
         "message",
         "messages.itemId",
-    ).where("messages.itemId", req.params.itemId);
+    ).where("messages.itemId", req.params.itemId).orderBy("messageId");
     
     return res.send({ response: { 
         messagesByItemId,

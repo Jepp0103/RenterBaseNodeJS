@@ -3,7 +3,6 @@ const fileSystem = require("fs");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { rawListeners } = require("process");
-//const User ...
 
 router.get("/", (req, res) => {
     if (req.session.login) {

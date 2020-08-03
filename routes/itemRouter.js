@@ -85,7 +85,6 @@ router.get("/myItems/:itemId", async (req, res) => {
             const itemAge = item[0].itemAge;
             const price = item[0].price;
             const days = item[0].days;
-            console.log(item);
             return res.send({ response: { 
                     itemIdConst,
                     itemName,
@@ -143,6 +142,7 @@ router.post("/createItem", (req, res) => {
 });
 
 router.post("/updateItem", (req, res) => {
+
     try {
         Item.query().where("userId", req.session.userId).andWhere("itemId", req.body.itemId2).update({
             itemName: req.body.itemName,

@@ -15,7 +15,7 @@ const PORT = process.argv[2];
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
 
-//Session
+//Session 
 const config = require("./config/config.json");
 app.use(session({
     secret: config.sessionSecret, //Signing the session id - protecting the session data from being used by other users.
