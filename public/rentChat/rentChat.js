@@ -3,8 +3,6 @@ const chatMessages = document.querySelector(".chat-messages");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
 
-
-//Get username and room from a given URL
 $.get("/username").done(data => { //Getting username with ajax call for the user currently signed in
     const username = data.response.username;
 
@@ -24,9 +22,13 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             );
         }
 
-        const room = objToString(Qs.parse(location.search, {
-                ignoreQueryPrefix: true,
+        //Getting the room from the query string of an url
+        const querystringRoom = objToString(Qs.parse(location.search, {
+                ignoreQueryPrefix: true
         }));
+
+        //Removing uneccesary prefixes in the room name and details
+        const room = querystringRoom.substring(12, querystringRoom.length);
             
         //Defining the socket
         const socket = io.connect("192.168.0.34:3000");
@@ -42,7 +44,6 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
         //Message from server
         socket.on("message", message => {
-            console.log(message);
             outputMessage(message);
 
             //Scroll down
@@ -89,13 +90,13 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }
     });
 
-    //Getting url in order achieve item id for getting and prepending the messages from the database to the HTML.
+    //Getting url in order achieve item id for getting and prepending the messages from the database on the next chat HTML-page.
     let currentUrl = window.location.href;
     let choosenItemId = currentUrl.charAt(currentUrl.length - 1); //Item id is the last character of the url.
 
-    console.log("Choosen item id after", choosenItemId);
+    console.log("Choosen item id: ", choosenItemId);
 
-    // Item id to choose in dropdown
+    //Prepending messages and users on the chat page after choosing selected room. 
     $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => {
         for (let i = 0; i < data.response.messagesByItemId.length; i++) {
             console.log("Saved messages:", data.response.messagesByItemId[i].message);
@@ -131,6 +132,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         });
     });
 
+    //Formatting querystring to a more readable string
     function objToString(obj) {
         var str = '';
         for (var p in obj) {

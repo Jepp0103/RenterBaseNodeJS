@@ -15,7 +15,6 @@ class User extends Model {
                 to: "items.userId"
             }
         },
-        
         messages: {
             relation: Model.HasManyRelation,
             modelClass: Message,
