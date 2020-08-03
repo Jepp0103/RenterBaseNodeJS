@@ -142,7 +142,6 @@ router.post("/createItem", (req, res) => {
 });
 
 router.post("/updateItem", (req, res) => {
-
     try {
         Item.query().where("userId", req.session.userId).andWhere("itemId", req.body.itemId2).update({
             itemName: req.body.itemName,

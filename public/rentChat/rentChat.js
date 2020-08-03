@@ -77,8 +77,6 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             roomName.innerText = room;
         }
 
-        console.log("username const", username);
-
         //Adding users to DOM - HTML
         function outputUsers(users) { //Mapping through the array of users
             userList.innerHTML = `
@@ -100,7 +98,6 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             $(".chat-messages").append(
                 "<div class=\"message\">" + 
                 "<p>" + 
-                    // "<b> Id of user: " + data.response.messagesByItemId[i].userId + "</b>" +
                     "<b>" + data.response.usersByMessages[i].username + "</b>" +
                     "<span>" + data.response.messagesByItemId[i].time + "</span>" +
                     "</p>" + 
@@ -113,12 +110,11 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
     });  
 
     $("#addMessageButton").click(() => {
-        console.log("new Message: ", $("#msg").val());
         //Setting up date and time for new messages.
         const date = new Date();
         const fullDate = "   " + date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+
         const newMessage = $("#msg").val();
-        console.log("new message itemId", choosenItemId);
         $("#chat-form").submit(function(e) {
             e.preventDefault();
             $.ajax({
