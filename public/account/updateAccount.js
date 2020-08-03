@@ -7,9 +7,3 @@ $.get("/accountData").done(data => {
     $("#zipCode").val(data.response.zipCode);
     $("#userAge").val(data.response.userAge);
 });
-
-
-
-
-
-

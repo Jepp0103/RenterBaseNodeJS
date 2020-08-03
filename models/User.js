@@ -3,7 +3,6 @@ const { Model } = require("objection");
 const Item = require("./Item.js");
 const Message = require("./Message.js");
 
-
 class User extends Model {
     static tableName = "users";
 

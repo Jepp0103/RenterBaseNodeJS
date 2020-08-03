@@ -9,7 +9,7 @@ router.get("/createItem", (req, res) => {
     if (req.session.login) {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
         const createItemPage = fileSystem.readFileSync("./public/item/createItem.html", "utf-8");
-        const footerPage = fileSystem.readFileSync("./public/footer/footer.html");
+        const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
         return res.send(navbarPage + createItemPage + footerPage);
     } else {
         return res.redirect("/login");
