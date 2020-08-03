@@ -38,7 +38,7 @@ router.get("/itemsAndUsers", async (req, res) => {
 }); 
 
 router.get("/myItems", async (req, res) => {
-    if(req.session.login) {
+    if (req.session.login) {
         userId = req.session.userId;
         const myItems = await Item.query().
             select(
@@ -50,7 +50,8 @@ router.get("/myItems", async (req, res) => {
                 "description", 
                 "itemAge", 
                 "price", 
-                "days")
+                "days"
+                )
                 .where("user_id", userId);
         return res.send({ response: { 
                 myItems

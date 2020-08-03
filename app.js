@@ -11,7 +11,7 @@ const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require("./utils/u
 //Port 
 const PORT = process.argv[2];
 
-//jSON and form data in HTML-files
+//Middleware for passing jSON and form data in HTML-files
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
 

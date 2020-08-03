@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const fileSystem = require("fs");
 
-
 //GET methods
 router.get("/rentChat", (req, res) => {
     if (req.session.login) {

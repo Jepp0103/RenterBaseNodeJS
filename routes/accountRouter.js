@@ -63,13 +63,13 @@ router.post("/createAccount", (req, res) => {
             zipCode, 
             userAge } = req.body;
     
-    if(username && password && email && address && city && zipCode && userAge) {
-        if(password.length < 8) {
+    if (username && password && email && address && city && zipCode && userAge) {
+        if (password.length < 8) {
             return res.status(400).send({ response: "Length of password must be 8 characters long and have an uppercase start letter."})
         } else {
             try {
                 User.query().select("username").where("username", username).then(foundUser => {
-                    if(foundUser.length > 0) {
+                    if (foundUser.length > 0) {
                         return res.status(400).send({ response: "User already exists in database."});
                     } else {
                         bcrypt.hash(password, saltRounds).then(hashedPassword => {

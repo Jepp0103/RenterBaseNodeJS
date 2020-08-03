@@ -33,7 +33,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         //Defining the socket
         const socket = io.connect("192.168.0.34:3000");
 
-        //Joining chatroom
+        //Joining chatroom on server
         socket.emit("joinRoom", { username, room });
 
         //Getting room and users
@@ -47,25 +47,25 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             outputMessage(message);
 
             //Scroll down
-            chatMessages.scrollTop = chatMessages.scrollHeight; //Allways goes bottom of scroll page in messages.
+            chatMessages.scrollTop = chatMessages.scrollHeight; //Allways goes to bottom of scroll page in messages.
         });
 
         //Message submit
         chatForm.addEventListener("submit", e => {
             e.preventDefault();
             
-            //Getting message to 
+            //Getting message to send from input
             const msg = e.target.elements.msg.value;
 
             //Emitting message to server
             socket.emit("chatMessage", msg);
 
-            //Clearing input in message area
+            //Clearing input in message area after sending message
             e.target.elements.msg.value = "";
             e.target.elements.msg.focus();
         });
 
-        //Output message to DOM
+        //Outputting message to DOM
         function outputMessage(message) {
             const div = document.createElement("div"); 
             div.classList.add("message");
@@ -96,11 +96,10 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
     console.log("Choosen item id: ", choosenItemId);
 
-    //Prepending messages and users on the chat page after choosing selected room. 
-    $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => {
+    //jQuery ajax call for getting users, messages and time from db by specific item id.
+    $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => { 
         for (let i = 0; i < data.response.messagesByItemId.length; i++) {
-            console.log("Saved messages:", data.response.messagesByItemId[i].message);
-            $(".chat-messages").append(
+            $(".chat-messages").append(  //Appending messages and users on the chat page after choosing selected room. 
                 "<div class=\"message\">" + 
                 "<p>" + 
                     "<b>" + data.response.usersByMessages[i].username + "</b>" +
@@ -120,7 +119,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         const fullDate = "   " + date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
 
         const newMessage = $("#msg").val();
-        $("#chat-form").submit(function(e) {
+        $("#chat-form").submit(function(e) { //Sending new message typed in input to server with ajax.
             e.preventDefault();
             $.ajax({
                 url: "/addMessage",
@@ -134,8 +133,8 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
     //Formatting querystring to a more readable string
     function objToString(obj) {
-        var str = '';
-        for (var p in obj) {
+        let str = '';
+        for (let p in obj) {
             if (obj.hasOwnProperty(p)) {
                 str += p + '::' + obj[p] + '\n';
             }
