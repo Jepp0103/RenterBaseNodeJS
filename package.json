@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Jepp0103/ReexamProject#readme",
   "dependencies": {
-    "bcrypt": "^5.0.0", 
+    "bcrypt": "^5.0.0",
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -31,7 +31,7 @@
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
-    "objection": "^2.2.0",
+    "objection": "^2.2.2",
     "qs": "^6.9.4",
     "query-string": "^6.13.1",
     "socket.io": "^2.3.0"
