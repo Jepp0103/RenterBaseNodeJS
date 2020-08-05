@@ -15,8 +15,8 @@ function getCurrentUser(id) {
 function userLeave(id) {
     const index = users.findIndex(user => user.id === id);
 
-    if(index !== -1) { //Choosing minus 1 when having no index
-        return users.splice(index, 1)[0]; //Returning a single user instead of the whole array.
+    if(index !== -1) { //Choosing minus 1 if user from index was not found in the array.
+        return users.splice(index, 1)[0]; //Returning the array of users without the "not found"-user.
     }
 }
 

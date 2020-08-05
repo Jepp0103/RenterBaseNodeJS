@@ -61,7 +61,7 @@ const bot = "Renter Bot";
 
 //Establishing socket connection
 serverIo.on("connection", socket => {
-    socket.on("joinRoom", ({ username, room }) => {
+    socket.on("joinRoom", ({ username, room }) => { //Takes in object of username and room
         //User who has joined the room
         const user = userJoin(socket.id, username, room); //Method from utils - users
 
@@ -74,7 +74,7 @@ serverIo.on("connection", socket => {
         /*Emits to all other users than the connected user
         that a certain user has connected to the room - broadcast.*/
         socket.broadcast
-            .to(user.room)
+            .to(user.room) //Using "to" in order to broadcast to a specific room.
             .emit(
                 "message", 
                 formatMessage(bot, `${user.username} has joined the chat`)
@@ -83,19 +83,20 @@ serverIo.on("connection", socket => {
         //Sending info about users and room
         serverIo.to(user.room).emit("roomUsers", {
             room: user.room,
-            users: getRoomUsers(user.room) //Method from utils - users
+            users: getRoomUsers(user.room) //Send all users in room in sidebar. Method from utils - users
         });
     });
 
     //Listening for chat messages from clients
     socket.on("chatMessage", msg => {
         const user = getCurrentUser(socket.id);
-        serverIo.to(user.room).emit("message", formatMessage(user.username, msg)); //Sending message back to the client on "message"
+        serverIo.to(user.room).emit("message", formatMessage(user.username, msg)); /*Sending message back to the client on 
+                                                                                    "message" on the specific room with "to"*/
     });
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        const user = userLeave(socket.id); //Using method userLeave in utils - users.
+        const user = userLeave(socket.id); //Using method userLeave in utils - users. Finding user by the specific socket id.
 
         if (user) {
             serverIo.to(user.room).emit(

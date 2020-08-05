@@ -23,7 +23,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                 ignoreQueryPrefix: true
         }));
 
-        //Removing uneccesary prefixes in the room name and details
+        //Removing unneccesary prefixes in the room querystring to only display name and details
         const room = querystringRoom.substring(12, querystringRoom.length);
             
         //Defining the socket and connecting to server
@@ -87,7 +87,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         function outputUsers(users) { //Mapping through the array of users
             userList.innerHTML = `
                 ${users.map(user => `<li>${user.username}</li>`).join("")} 
-            `;
+            `; //Join - copies all elements in array into a new string
         }
     });
 
