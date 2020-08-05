@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Message = require("../models/Message");
 
 router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
-    //Query for displaying messages in a specific room
+    //Query for displaying messages in a specific room defined by an item and its id
     const messagesByItemId = await Item.query().joinRelated("messages").select(
         "messageId",
         "time",
@@ -23,7 +23,7 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
         "messages.itemId",
     ).where("messages.itemId", req.params.itemId).orderBy("messageId");
     
-    return res.send({ response: { 
+    res.send({ response: { 
         messagesByItemId,
         usersByMessages
     }});
@@ -32,7 +32,7 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
 //Post methods
 router.post("/addMessage", (req, res) => {
     if (req.session.login) {
-        //Getting all values from jQuery ajax call
+        //Getting all values from jQuery post ajax call
         const time = req.body.time;
         const message = req.body.newMsg;
         const itemId = req.body.itemId;
@@ -48,11 +48,11 @@ router.post("/addMessage", (req, res) => {
                     console.log("Message,", message, ", added.");
                 });  
             } catch (error) {
-                return res.status(500).send({ response: "Something went wrong with the DB" });  
+                res.status(500).send({ response: "Something went wrong with the DB" });  
             }
         }
     } else {
-        return res.redirect("/login");
+        res.redirect("/login");
     }
 });
 

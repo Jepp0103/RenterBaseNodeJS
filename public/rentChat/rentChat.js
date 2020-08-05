@@ -1,8 +1,3 @@
-const chatForm = document.getElementById("chat-form");
-const chatMessages = document.querySelector(".chat-messages");
-const roomName = document.getElementById("room-name");
-const userList = document.getElementById("users");
-
 $.get("/username").done(data => { //Getting username with ajax call for the user currently signed in
     const username = data.response.username;
 
@@ -43,6 +38,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         });
 
         //Message from server
+        const chatMessages = document.querySelector(".chat-messages");
         socket.on("message", message => {
             outputMessage(message);
 
@@ -51,6 +47,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         });
 
         //Message submit
+        const chatForm = document.getElementById("chat-form");
         chatForm.addEventListener("submit", e => {
             e.preventDefault();
             
@@ -78,11 +75,13 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }
 
         //Adding room name to DOM - HTML
+        const roomName = document.getElementById("room-name");
         function outputRoomName(room) {
             roomName.innerText = room;
         }
 
         //Adding users to DOM - HTML
+        const userList = document.getElementById("users");
         function outputUsers(users) { //Mapping through the array of users
             userList.innerHTML = `
                 ${users.map(user => `<li>${user.username}</li>`).join("")} 
@@ -93,8 +92,6 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
     //Getting url in order achieve item id for getting and prepending the messages from the database on the next chat HTML-page.
     let currentUrl = window.location.href;
     let choosenItemId = currentUrl.charAt(currentUrl.length - 1); //Item id is the last character of the url.
-
-    console.log("Choosen item id: ", choosenItemId);
 
     //jQuery ajax call for getting users, messages and time from db by specific item id.
     $.get("/messagesAndUsersByItemId/" + choosenItemId).done(data => { 

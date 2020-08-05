@@ -58,20 +58,21 @@ app.use(express.static(__dirname + "/public/item"));
 app.use(express.static(__dirname + "/public/navbar"));
 app.use(express.static(__dirname + "/public/account"));
 
-//Chat
-const bot = "Bot";
+//Defining name of chat bot
+const bot = "Renter Bot";
 
 //Establishing socket connection
 serverIo.on("connection", socket => {
     socket.on("joinRoom", ({ username, room }) => {
-        const user = userJoin(socket.id, username, room);
+        const user = userJoin(socket.id, username, room); //Method from utils - users
 
         socket.join(user.room);
 
         //Bot welcoming a current user
-        socket.emit("message", formatMessage(bot, "Welcome to the chat!"));
+        socket.emit("message", formatMessage(bot, "Welcome to the chat!")); //Method from utils - messages
 
-        //Emits to all users that a certain user has connected to the room - broadcast.
+        /*Emits to all other users than the connected user
+        that a certain user has connected to the room - broadcast.*/
         socket.broadcast
             .to(user.room)
             .emit(
@@ -82,7 +83,7 @@ serverIo.on("connection", socket => {
         //Sending info about users and room
         serverIo.to(user.room).emit("roomUsers", {
             room: user.room,
-            users: getRoomUsers(user.room)
+            users: getRoomUsers(user.room) //Method from utils - users
         });
     });
 
@@ -94,7 +95,7 @@ serverIo.on("connection", socket => {
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        const user = userLeave(socket.id); //Using method userLeave in utils.
+        const user = userLeave(socket.id); //Using method userLeave in utils. Method from utils - users.
 
         if (user) {
             serverIo.to(user.room).emit(
@@ -105,7 +106,7 @@ serverIo.on("connection", socket => {
             //Sending info about users and room
             serverIo.to(user.room).emit("roomUsers", {
                 room: user.room,
-                users: getRoomUsers(user.room)
+                users: getRoomUsers(user.room) //Method from utils - users.
             });
         }
     });
@@ -113,7 +114,7 @@ serverIo.on("connection", socket => {
 
 //Starting server
 messageServer.listen(PORT, (error) => {
-    if(error) {
+    if (error) {
         console.log("Error, server can't run.");
     }
     console.log("Server is running on port", messageServer.address().port);

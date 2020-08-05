@@ -2,13 +2,12 @@ const router = require("express").Router();
 const fileSystem = require("fs");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const { rawListeners } = require("process");
 
 router.get("/", (req, res) => {
     if (req.session.login) {
-        return res.redirect("/main");
+        res.redirect("/main");
     } else {
-        return res.redirect("/login");    
+        res.redirect("/login");    
     }
 });
 
@@ -18,9 +17,9 @@ router.get("/login", (req, res) => {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
         const loginPage = fileSystem.readFileSync("./public/login/login.html", "utf-8");
         const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
-        return res.send(navbarPage + loginPage + footerPage);
+        res.send(navbarPage + loginPage + footerPage);
     } else {
-        return res.redirect("/main");
+        res.redirect("/main");
     }
 });
 
@@ -29,9 +28,9 @@ router.get("/main", (req, res) => {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
         const mainPage = fileSystem.readFileSync("./public/main/main.html", "utf-8");
         const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
-        return res.send(navbarPage + mainPage + footerPage);
+        res.send(navbarPage + mainPage + footerPage);
     } else {
-        return res.redirect("login");
+        res.redirect("login");
     }
 });
 
@@ -43,7 +42,7 @@ router.post("/main", async (req, res) => {
             const validPassword = await User.query().select("id", "username", "email", "password").where("username", username);
         
             if (validPassword.length !== 1) { //Checking if one matching user appears from the database.
-                return res.redirect("login");
+                res.redirect("login");
             }
 
             if (validPassword.length === 1) {
@@ -53,13 +52,13 @@ router.post("/main", async (req, res) => {
                         req.session.login = true;
                         req.session.username = username;
                         req.session.email = validPassword[0].email;
-                        return res.redirect("/main");
+                        res.redirect("/main");
                     } else {
-                        return res.redirect("login");
+                        res.redirect("login");
                     }
                 });
             } else {
-                return res.redirect("login");
+                res.redirect("login");
             }
         }
     } catch (error) {
@@ -71,7 +70,7 @@ router.post("/logout", (req, res) => {
     req.session.login = undefined;
     req.session.username = undefined;
     req.session.email = undefined;
-    return res.redirect("/login");
+    res.redirect("/login");
 });
 
 
