@@ -87,7 +87,7 @@ serverIo.on("connection", socket => {
         });
     });
 
-    //Listening for chat messages
+    //Listening for chat messages from clients
     socket.on("chatMessage", msg => {
         const user = getCurrentUser(socket.id);
         serverIo.to(user.room).emit("message", formatMessage(user.username, msg)); //Sending message back to the client on "message"

@@ -18,6 +18,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }
 
         //Getting the room from the query string of an url
+        //Query string automatically grapped and defined from the select - dropdown in enterChat.html
         const querystringRoom = objToString(Qs.parse(location.search, {
                 ignoreQueryPrefix: true
         }));
@@ -41,18 +42,17 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         const chatMessages = document.querySelector(".chat-messages");
         socket.on("message", message => {
             outputMessage(message);
-
             //Scroll down
             chatMessages.scrollTop = chatMessages.scrollHeight; //Allways goes to bottom of scroll page in messages.
         });
 
-        //Message submit
+        //Message submit from user
         const chatForm = document.getElementById("chat-form");
-        chatForm.addEventListener("submit", e => {
+        chatForm.addEventListener("submit", e => { //Event handler and event parameter
             e.preventDefault();
             
             //Getting message to send from input
-            const msg = e.target.elements.msg.value;
+            const msg = e.target.elements.msg.value; //Getting value from msg id in rentChat.html
 
             //Emitting message to server
             socket.emit("chatMessage", msg);
@@ -76,7 +76,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             document.querySelector(".chat-messages").appendChild(div);  //Adding new div to chat messages.
         }
 
-        //Adding room name to DOM - HTML
+        //Outputting room name to DOM - HTML
         const roomName = document.getElementById("room-name");
         function outputRoomName(room) {
             roomName.innerText = room;

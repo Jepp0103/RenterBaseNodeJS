@@ -1,6 +1,6 @@
 const date = new Date();
 
-function formatMessage(username, text) {
+function formatMessage(username, text) { //Formatting a message as an object of username, text and time.
     return {
         username,
         text,
