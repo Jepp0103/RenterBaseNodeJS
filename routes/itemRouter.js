@@ -73,7 +73,6 @@ router.get("/deleteItem", (req, res) => {
 });
 
 router.get("/myItems/:itemId", async (req, res) => {
-    console.log("Item id query", req.query.itemId);
     req.params.itemId = req.query.itemId;
     try {
         if (req.session.login) {

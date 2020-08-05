@@ -119,10 +119,10 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         const fullDate = "   " + date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
 
         const newMessage = $("#msg").val();
-        $("#chat-form").submit(function(e) { //Sending new message typed in input to server with ajax.
+        $("#chat-form").submit(function(e) { 
             e.preventDefault();
-            $.ajax({
-                url: "/addMessage",
+            $.ajax({ 
+                url: "/addMessage", //Sending new message typed in input to server with ajax.
                 type: "post",
                 data: ({ newMsg: newMessage,
                          time: fullDate,

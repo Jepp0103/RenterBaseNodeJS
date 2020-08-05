@@ -4,7 +4,7 @@ const app = express();
 const messageServer = require("http").createServer(app);
 const session = require("express-session"); //Session middleware
 const socketio = require("socket.io");
-const io = socketio(messageServer);
+const serverIo = socketio(messageServer);
 const formatMessage = require("./utils/messages.js");
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require("./utils/users");
 
@@ -62,7 +62,7 @@ app.use(express.static(__dirname + "/public/account"));
 const bot = "Bot";
 
 //Establishing socket connection
-io.on("connection", socket => {
+serverIo.on("connection", socket => {
     socket.on("joinRoom", ({ username, room }) => {
         const user = userJoin(socket.id, username, room);
 
@@ -80,7 +80,7 @@ io.on("connection", socket => {
             );
         
         //Sending info about users and room
-        io.to(user.room).emit("roomUsers", {
+        serverIo.to(user.room).emit("roomUsers", {
             room: user.room,
             users: getRoomUsers(user.room)
         });
@@ -89,21 +89,21 @@ io.on("connection", socket => {
     //Listening for chat messages
     socket.on("chatMessage", msg => {
         const user = getCurrentUser(socket.id);
-        io.to(user.room).emit("message", formatMessage(user.username, msg)); //Sending message back to the client on "message"
+        serverIo.to(user.room).emit("message", formatMessage(user.username, msg)); //Sending message back to the client on "message"
     });
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        const user = userLeave(socket.id);
+        const user = userLeave(socket.id); //Using method userLeave in utils.
 
         if (user) {
-            io.to(user.room).emit(
+            serverIo.to(user.room).emit(
                 "message", 
                 formatMessage(bot, `${user.username} has left the chat`)
             );
 
             //Sending info about users and room
-            io.to(user.room).emit("roomUsers", {
+            serverIo.to(user.room).emit("roomUsers", {
                 room: user.room,
                 users: getRoomUsers(user.room)
             });
