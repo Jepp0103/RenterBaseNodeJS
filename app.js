@@ -19,7 +19,7 @@ app.use(express.json());
 const config = require("./config/config.json");
 app.use(session({
     secret: config.sessionSecret, //Signing the session id - protecting the session data from being used by other users.
-    resave: false, //Only necessary if implementing touch method - forces session to be saved back to session store.
+    resave: false, //Forces session to be saved back to session store.
     saveUninitialized: true
 }));
 

@@ -14,7 +14,7 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
         "itemName"
         ).distinct().where("items.itemId", req.params.itemId);
     
-    //Query for displaying users to a specific message
+    //Query for displaying users to a specific message in chat room
     const usersByMessages = await User.query().joinRelated("messages").select(
         "userId",
         "username",
@@ -22,10 +22,10 @@ router.get("/messagesAndUsersByItemId/:itemId", async (req, res) => {
         "message",
         "messages.itemId",
     ).where("messages.itemId", req.params.itemId).orderBy("messageId");
-    
+
     res.send({ response: { 
-        messagesByItemId,
-        usersByMessages
+            messagesByItemId,
+            usersByMessages 
     }});
 });
 

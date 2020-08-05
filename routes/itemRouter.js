@@ -74,7 +74,8 @@ router.get("/myItems/:itemId", async (req, res) => {
             const itemAge = item[0].itemAge;
             const price = item[0].price;
             const days = item[0].days;
-            res.send({ response: { 
+            res.send(
+                { response: { 
                     itemIdConst,
                     itemName,
                     brand,
