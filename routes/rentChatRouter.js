@@ -7,9 +7,9 @@ router.get("/rentChat", (req, res) => {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
         const rentChatPage = fileSystem.readFileSync("./public/rentChat/rentChat.html", "utf-8");
         const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
-        return res.send(navbarPage + rentChatPage + footerPage);
+        res.send(navbarPage + rentChatPage + footerPage);
     } else {
-        return res.redirect("/login");
+        res.redirect("/login");
     }
 });
 
@@ -18,9 +18,9 @@ router.get("/enterChat", (req, res) => {
         const navbarPage = fileSystem.readFileSync("./public/navbar/navbar.html", "utf-8");
         const enterChatPage = fileSystem.readFileSync("./public/rentChat/enterChat.html", "utf-8");
         const footerPage = fileSystem.readFileSync("./public/footer/footer.html", "utf-8");
-        return res.send(navbarPage + enterChatPage + footerPage);
+        res.send(navbarPage + enterChatPage + footerPage);
     } else {
-        return res.redirect("/login");
+        res.redirect("/login");
     }
 });
 
