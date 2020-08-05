@@ -25,7 +25,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         //Removing uneccesary prefixes in the room name and details
         const room = querystringRoom.substring(12, querystringRoom.length);
             
-        //Defining the socket
+        //Defining the socket and connecting to server
         const socket = io.connect("192.168.0.34:3000");
 
         //Joining chatroom on server
@@ -65,8 +65,10 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         //Outputting message to DOM
         function outputMessage(message) {
             const div = document.createElement("div"); 
-            div.classList.add("message");
-            div.innerHTML = `<p> <b>${message.username}</b> <span>${message.time}</span></p> 
+            div.classList.add("message"); //Adding a new div with class named "message" after sending a message
+
+            //Setting the inner HTML/content of the div and adding incoming username, time and message to it
+            div.innerHTML = `<p> <b>${message.username}</b> <span>${message.time}</span></p>  
             <p class="text">
                 ${message.text}
             </p>`;
@@ -80,7 +82,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
             roomName.innerText = room;
         }
 
-        //Adding users to DOM - HTML
+        //Adding users to DOM in sidebar - HTML
         const userList = document.getElementById("users");
         function outputUsers(users) { //Mapping through the array of users
             userList.innerHTML = `
@@ -89,7 +91,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
         }
     });
 
-    //Getting url in order achieve item id for getting and prepending the messages from the database on the next chat HTML-page.
+    //Getting url in order to achieve item id for getting and prepending the messages from the database on the next chat HTML-page.
     let currentUrl = window.location.href;
     let choosenItemId = currentUrl.charAt(currentUrl.length - 1); //Item id is the last character of the url.
 

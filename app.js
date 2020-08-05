@@ -64,8 +64,10 @@ const bot = "Renter Bot";
 //Establishing socket connection
 serverIo.on("connection", socket => {
     socket.on("joinRoom", ({ username, room }) => {
+        //User who has joined the room
         const user = userJoin(socket.id, username, room); //Method from utils - users
 
+        //User joining room
         socket.join(user.room);
 
         //Bot welcoming a current user
@@ -95,7 +97,7 @@ serverIo.on("connection", socket => {
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        const user = userLeave(socket.id); //Using method userLeave in utils. Method from utils - users.
+        const user = userLeave(socket.id); //Using method userLeave in utils - users.
 
         if (user) {
             serverIo.to(user.room).emit(
