@@ -5,11 +5,8 @@ const messageServer = require("http").createServer(app);
 const session = require("express-session"); //Session middleware
 const socketio = require("socket.io");
 const serverIo = socketio(messageServer);
-const formatMessage = require("./utils/messages.js");
-const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require("./utils/users");
-
-//Port 
-const PORT = process.argv[2];
+const formatMessage = require("./public/rentChat/messages.js");
+const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require("./public/rentChat/users");
 
 //Middleware for passing jSON and form data in HTML-files
 app.use(express.urlencoded({ extended: false}));
@@ -59,17 +56,17 @@ app.use(express.static(__dirname + "/public/account"));
 //Defining name of chat bot
 const bot = "Renter Bot";
 
-//Establishing socket connection
+//Establishing socket connection everytime a client connects
 serverIo.on("connection", socket => {
-    socket.on("joinRoom", ({ username, room }) => { //Takes in object of username and room
+    socket.on("joinRoom", ({ username, room }) => { //Takes in object of username and room - waiting for clients
         //User who has joined the room
-        const user = userJoin(socket.id, username, room); //Method from utils - users
+        const user = userJoin(socket.id, username, room); //Method from users.js - added to array of users.
 
         //User joining room
         socket.join(user.room);
 
         //Bot welcoming a current user
-        socket.emit("message", formatMessage(bot, "Welcome to the chat!")); //Method from utils - messages
+        socket.emit("message", formatMessage(bot, "Welcome to the chat!")); //Method from messages.js
 
         /*Emits to all other users than the connected user
         that a certain user has connected to the room - broadcast.*/
@@ -83,20 +80,20 @@ serverIo.on("connection", socket => {
         //Sending info about users and room
         serverIo.to(user.room).emit("roomUsers", {
             room: user.room,
-            users: getRoomUsers(user.room) //Send all users in room in sidebar. Method from utils - users
+            users: getRoomUsers(user.room) //Send to all users in room in sidebar. Method from users.js
         });
     });
 
     //Listening for chat messages from clients
     socket.on("chatMessage", msg => {
         const user = getCurrentUser(socket.id);
-        serverIo.to(user.room).emit("message", formatMessage(user.username, msg)); /*Sending message back to the client on 
+        serverIo.to(user.room).emit("message", formatMessage(user.username, msg)); /*Sending message back to all clients connected in the room on 
                                                                                     "message" on the specific room with "to"*/
     });
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        const user = userLeave(socket.id); //Using method userLeave in utils - users. Finding user by the specific socket id and removing from the array of users.
+        const user = userLeave(socket.id); //Using method userLeave in users.js. Finding user by the specific socket id and removing from the array of users.
 
         if (user) {
             serverIo.to(user.room).emit(
@@ -107,11 +104,14 @@ serverIo.on("connection", socket => {
             //Sending info about users and room
             serverIo.to(user.room).emit("roomUsers", {
                 room: user.room,
-                users: getRoomUsers(user.room) //Method from utils - users.
+                users: getRoomUsers(user.room) //Method from users.js
             });
         }
     });
 });
+
+//Port 
+const PORT = process.argv[2];
 
 //Starting server
 messageServer.listen(PORT, (error) => {

@@ -23,7 +23,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
                 ignoreQueryPrefix: true
         }));
 
-        //Removing unneccesary prefixes in the room querystring to only display name and details
+        //Removing unneccesary prefixes in the room querystring to only display room details
         const room = querystringRoom.substring(12, querystringRoom.length);
             
         //Defining the socket and connecting to server
