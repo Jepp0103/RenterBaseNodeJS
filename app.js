@@ -96,7 +96,7 @@ serverIo.on("connection", socket => {
 
     //When a client disconnects
     socket.on("disconnect", () => {
-        const user = userLeave(socket.id); //Using method userLeave in utils - users. Finding user by the specific socket id.
+        const user = userLeave(socket.id); //Using method userLeave in utils - users. Finding user by the specific socket id and removing from the array of users.
 
         if (user) {
             serverIo.to(user.room).emit(
