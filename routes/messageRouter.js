@@ -37,6 +37,7 @@ router.post("/addMessage", (req, res) => {
         const message = req.body.newMsg;
         const itemId = req.body.itemId;
         const userId = req.session.userId;   
+        
         if (message && itemId && userId) {
             try {
                 Message.query().insert({
