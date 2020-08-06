@@ -71,7 +71,7 @@ serverIo.on("connection", socket => {
         /*Emits to all other users than the connected user
         that a certain user has connected to the room - broadcast.*/
         socket.broadcast
-            .to(user.room) //Using "to" in order to broadcast to a specific room.
+            .to(user.room) //Using "to" in order to broadcast to a specific room for a given user.
             .emit(
                 "message", 
                 formatMessage(bot, `${user.username} has joined the chat`)
