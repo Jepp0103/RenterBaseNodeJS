@@ -59,7 +59,7 @@ $.get("/username").done(data => { //Getting username with ajax call for the user
 
             //Clearing input in message area after sending message
             e.target.elements.msg.value = "";
-            e.target.elements.msg.focus();
+            e.target.elements.msg.focus(); //Focusing on the specific input with cursor in order to send more messages.
         });
 
         //Outputting message to DOM
