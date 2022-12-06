@@ -32,7 +32,7 @@
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "objection": "^2.2.2",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "query-string": "^6.13.1",
     "socket.io": "^2.3.0"
   }
