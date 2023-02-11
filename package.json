@@ -30,7 +30,7 @@
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.11",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.20",
     "objection": "^2.2.2",
     "qs": "^6.9.4",
     "query-string": "^6.13.1",
